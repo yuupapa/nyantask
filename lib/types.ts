@@ -1,0 +1,137 @@
+/**
+ * Client / Server 両方から安全にインポートできる共有型・定数。
+ * （`next/headers` などサーバー専用モジュールを参照しないこと）
+ */
+
+export const USER_ROLES = ["admin", "general"] as const;
+
+export type UserRole = (typeof USER_ROLES)[number];
+
+export const ROLE_LABELS: Record<UserRole, string> = {
+  admin: "管理者",
+  general: "一般",
+};
+
+export function isValidRole(role: string): role is UserRole {
+  return (USER_ROLES as readonly string[]).includes(role);
+}
+
+export type Profile = {
+  id: string;
+  email: string;
+  display_name: string | null;
+  role: UserRole;
+  fish: number;
+  paw: number;
+  gemini_api_key: string | null;
+  created_at: string;
+  last_seen_at: string;
+};
+
+// ============================================================
+// 通貨
+// ============================================================
+
+export const CURRENCY_KINDS = ["fish", "paw"] as const;
+export type CurrencyKind = (typeof CURRENCY_KINDS)[number];
+
+export const CURRENCY_LABELS: Record<CurrencyKind, string> = {
+  fish: "おさかな",
+  paw: "にくきゅう",
+};
+
+export const CURRENCY_EMOJI: Record<CurrencyKind, string> = {
+  fish: "🐟",
+  paw: "🐾",
+};
+
+export const CURRENCY_REASONS = [
+  "task_complete",
+  "task_uncomplete",
+  "daily_perfect_bonus",
+  "friendship_levelup",
+  "streak_bonus",
+  "secret_cat",
+  "admin_grant",
+  "spend_summon",
+  "other",
+] as const;
+export type CurrencyReason = (typeof CURRENCY_REASONS)[number];
+
+export type CurrencyTransaction = {
+  id: string;
+  user_id: string;
+  kind: CurrencyKind;
+  amount: number;
+  reason: CurrencyReason;
+  related_id: string | null;
+  note: string | null;
+  created_at: string;
+};
+
+// ============================================================
+// Web Push 購読
+// ============================================================
+
+export type PushSubscriptionRow = {
+  id: string;
+  user_id: string;
+  endpoint: string;
+  p256dh: string;
+  auth_secret: string;
+  user_agent: string | null;
+  created_at: string;
+};
+
+// ============================================================
+// タスク
+// ============================================================
+
+export const TASK_TYPES = ["routine", "daily"] as const;
+export type TaskType = (typeof TASK_TYPES)[number];
+
+export const TASK_TYPE_LABELS: Record<TaskType, string> = {
+  routine: "ルーチンタスク",
+  daily: "今日だけのタスク",
+};
+
+export type Task = {
+  id: string;
+  user_id: string;
+  title: string;
+  type: TaskType;
+  for_date: string | null;
+  sort_order: number;
+  archived_at: string | null;
+  created_at: string;
+};
+
+export type TaskCompletion = {
+  id: string;
+  task_id: string;
+  user_id: string;
+  completed_at: string;
+  for_date: string;
+};
+
+// ============================================================
+// 猫
+// ============================================================
+
+export type Cat = {
+  id: string;
+  user_id: string;
+  name: string;
+  pattern: string;
+  face: string;
+  personality: string;
+  rarity: number;
+  hunger: number;
+  mood: number;
+  friendship_xp: number;
+  is_active: boolean;
+  is_runaway: boolean;
+  born_at: string;
+  last_decay_at: string;
+  created_at: string;
+};

@@ -1,0 +1,42 @@
+# Codex プロジェクト設定
+# https://developers.openai.com/codex/config-basic
+
+[project]
+# プロジェクト名（任意、表示用）
+name = "（プロジェクト名）"
+
+# 言語・出力設定
+language = "ja"
+style = "polite"  # です・ます調
+
+[behavior]
+# 確認なしで破壊的操作をしない
+require_confirmation_for_destructive = true
+
+# .env や secrets を読まない
+exclude_paths = [
+    ".env",
+    ".env.*",
+    "secrets/",
+    "**/.git/",
+    "node_modules/",
+    "dist/",
+    "build/",
+]
+
+[output]
+# 出力を結論先出し
+format = "conclusion-first"
+
+# コードブロックを優先
+prefer_code_blocks = true
+
+[references]
+# プロジェクト固有のルールはAGENTS.md を正本とする
+agents_file = "AGENTS.md"
+
+# 現在の作業状態
+state_file = "_PROJECT_STATE.md"
+
+# 旧構造の対応表
+legacy_map = "LEGACY_MAP.md"
