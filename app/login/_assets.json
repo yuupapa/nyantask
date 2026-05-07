@@ -1,0 +1,1044 @@
+{
+  "viewBox": "0 0 705.75 1253.999941",
+  "width": "941",
+  "height": "1672",
+  "images": [
+    {
+      "idx": 0,
+      "file": "/login-svg/img-00.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 941.0,
+      "height": 498.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 941,
+      "png_h": 498,
+      "bytes": 129989,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 0, 880.410148)"
+      ]
+    },
+    {
+      "idx": 1,
+      "file": "/login-svg/img-01.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 158.0,
+      "height": 140.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 158,
+      "png_h": 140,
+      "bytes": 3122,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 14.244953, 89.440368)"
+      ]
+    },
+    {
+      "idx": 2,
+      "file": "/login-svg/img-02.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 79.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 79,
+      "png_h": 81,
+      "bytes": 1692,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 146.94794, 59.450993)"
+      ]
+    },
+    {
+      "idx": 3,
+      "file": "/login-svg/img-03.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 60.0,
+      "height": 61.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 60,
+      "png_h": 61,
+      "bytes": 1186,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 58.479282, 223.642824)"
+      ]
+    },
+    {
+      "idx": 4,
+      "file": "/login-svg/img-04.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 589.0,
+      "height": 558.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 589,
+      "png_h": 558,
+      "bytes": 12788,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 131.953252, 74.44568)"
+      ]
+    },
+    {
+      "idx": 5,
+      "file": "/login-svg/img-05.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 118.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 118,
+      "png_h": 81,
+      "bytes": 2024,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 440.84382, 29.461617)"
+      ]
+    },
+    {
+      "idx": 6,
+      "file": "/login-svg/img-06.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 217.0,
+      "height": 220.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 217,
+      "png_h": 220,
+      "bytes": 4710,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 528.562744, 59.450993)"
+      ]
+    },
+    {
+      "idx": 7,
+      "file": "/login-svg/img-07.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 79.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 79,
+      "png_h": 81,
+      "bytes": 1723,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 440.84382, 163.664073)"
+      ]
+    },
+    {
+      "idx": 8,
+      "file": "/login-svg/img-08.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 217.0,
+      "height": 220.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 217,
+      "png_h": 220,
+      "bytes": 4801,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 14.244953, 298.616262)"
+      ]
+    },
+    {
+      "idx": 9,
+      "file": "/login-svg/img-09.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 79.0,
+      "height": 61.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 79,
+      "png_h": 61,
+      "bytes": 1303,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 617.031401, 238.637511)"
+      ]
+    },
+    {
+      "idx": 10,
+      "file": "/login-svg/img-10.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 99.0,
+      "height": 100.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 99,
+      "png_h": 100,
+      "bytes": 1937,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 587.79176, 298.616262)"
+      ]
+    },
+    {
+      "idx": 11,
+      "file": "/login-svg/img-11.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 119.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 119,
+      "png_h": 81,
+      "bytes": 1996,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 557.802385, 387.834655)"
+      ]
+    },
+    {
+      "idx": 12,
+      "file": "/login-svg/img-12.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 99.0,
+      "height": 80.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 99,
+      "png_h": 80,
+      "bytes": 1740,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 146.94794, 447.813406)"
+      ]
+    },
+    {
+      "idx": 13,
+      "file": "/login-svg/img-13.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 60.0,
+      "height": 41.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 60,
+      "png_h": 41,
+      "bytes": 887,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 14.244953, 492.047735)"
+      ]
+    },
+    {
+      "idx": 14,
+      "file": "/login-svg/img-14.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 217.0,
+      "height": 180.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 217,
+      "png_h": 180,
+      "bytes": 4322,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 58.479282, 507.042422)"
+      ]
+    },
+    {
+      "idx": 15,
+      "file": "/login-svg/img-15.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 99.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 99,
+      "png_h": 81,
+      "bytes": 1784,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 0, 641.244878)"
+      ]
+    },
+    {
+      "idx": 16,
+      "file": "/login-svg/img-16.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 256.0,
+      "height": 181.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 256,
+      "png_h": 181,
+      "bytes": 4721,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 249.661551, 477.053047)"
+      ]
+    },
+    {
+      "idx": 17,
+      "file": "/login-svg/img-17.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 216.0,
+      "height": 200.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 216,
+      "png_h": 200,
+      "bytes": 4577,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 470.083461, 432.818718)"
+      ]
+    },
+    {
+      "idx": 18,
+      "file": "/login-svg/img-18.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 118.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 118,
+      "png_h": 81,
+      "bytes": 1797,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 617.031401, 522.03711)"
+      ]
+    },
+    {
+      "idx": 19,
+      "file": "/login-svg/img-19.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 433.0,
+      "height": 61.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 433,
+      "png_h": 61,
+      "bytes": 2549,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 190.432535, 701.223629)"
+      ]
+    },
+    {
+      "idx": 20,
+      "file": "/login-svg/img-20.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 157.0,
+      "height": 160.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 157,
+      "png_h": 160,
+      "bytes": 3076,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 587.79176, 626.999924)"
+      ]
+    },
+    {
+      "idx": 21,
+      "file": "/login-svg/img-21.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 707.0,
+      "height": 140.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 707,
+      "png_h": 140,
+      "bytes": 30762,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 87.718923, 761.20238)"
+      ]
+    },
+    {
+      "idx": 22,
+      "file": "/login-svg/img-22.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 80.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 80,
+      "png_h": 81,
+      "bytes": 1779,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 161.192893, 790.442021)"
+      ]
+    },
+    {
+      "idx": 23,
+      "file": "/login-svg/img-23.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 59.0,
+      "height": 41.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 59,
+      "png_h": 41,
+      "bytes": 658,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 146.94794, 865.41546)"
+      ]
+    },
+    {
+      "idx": 24,
+      "file": "/login-svg/img-24.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 60.0,
+      "height": 41.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 60,
+      "png_h": 41,
+      "bytes": 638,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 161.192893, 969.62854)"
+      ]
+    },
+    {
+      "idx": 25,
+      "file": "/login-svg/img-25.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 40.0,
+      "height": 41.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 40,
+      "png_h": 41,
+      "bytes": 617,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 499.323102, 969.62854)"
+      ]
+    },
+    {
+      "idx": 26,
+      "file": "/login-svg/img-26.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 237.0,
+      "height": 220.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 237,
+      "png_h": 220,
+      "bytes": 8969,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 43.484595, 999.617915)"
+      ]
+    },
+    {
+      "idx": 27,
+      "file": "/login-svg/img-27.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 256.0,
+      "height": 220.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 256,
+      "png_h": 220,
+      "bytes": 7279,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 249.661551, 999.617915)"
+      ]
+    },
+    {
+      "idx": 28,
+      "file": "/login-svg/img-28.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 256.0,
+      "height": 220.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 256,
+      "png_h": 220,
+      "bytes": 6647,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 455.088774, 999.617915)"
+      ]
+    },
+    {
+      "idx": 29,
+      "file": "/login-svg/img-29.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 99.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 99,
+      "png_h": 81,
+      "bytes": 1556,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 631.276355, 1178.804434)"
+      ]
+    },
+    {
+      "idx": 30,
+      "file": "/login-svg/img-30.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 941.0,
+      "height": 1672.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 941,
+      "png_h": 1672,
+      "bytes": 680965,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 0, 0.221976)"
+      ]
+    },
+    {
+      "idx": 31,
+      "file": "/login-svg/img-31.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 941.0,
+      "height": 498.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 941,
+      "png_h": 498,
+      "bytes": 380417,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 0, 880.410148)"
+      ]
+    },
+    {
+      "idx": 32,
+      "file": "/login-svg/img-32.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 158.0,
+      "height": 140.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 158,
+      "png_h": 140,
+      "bytes": 21116,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 14.244953, 89.440368)"
+      ]
+    },
+    {
+      "idx": 33,
+      "file": "/login-svg/img-33.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 79.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 79,
+      "png_h": 81,
+      "bytes": 7280,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 146.94794, 59.450993)"
+      ]
+    },
+    {
+      "idx": 34,
+      "file": "/login-svg/img-34.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 60.0,
+      "height": 61.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 60,
+      "png_h": 61,
+      "bytes": 4718,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 58.479282, 223.642824)"
+      ]
+    },
+    {
+      "idx": 35,
+      "file": "/login-svg/img-35.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 589.0,
+      "height": 558.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 589,
+      "png_h": 558,
+      "bytes": 194846,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 131.953252, 74.44568)"
+      ]
+    },
+    {
+      "idx": 36,
+      "file": "/login-svg/img-36.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 118.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 118,
+      "png_h": 81,
+      "bytes": 11701,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 440.84382, 29.461617)"
+      ]
+    },
+    {
+      "idx": 37,
+      "file": "/login-svg/img-37.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 217.0,
+      "height": 220.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 217,
+      "png_h": 220,
+      "bytes": 48910,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 528.562744, 59.450993)"
+      ]
+    },
+    {
+      "idx": 38,
+      "file": "/login-svg/img-38.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 79.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 79,
+      "png_h": 81,
+      "bytes": 3459,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 440.84382, 163.664073)"
+      ]
+    },
+    {
+      "idx": 39,
+      "file": "/login-svg/img-39.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 217.0,
+      "height": 220.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 217,
+      "png_h": 220,
+      "bytes": 49106,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 14.244953, 298.616262)"
+      ]
+    },
+    {
+      "idx": 40,
+      "file": "/login-svg/img-40.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 79.0,
+      "height": 61.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 79,
+      "png_h": 61,
+      "bytes": 4887,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 617.031401, 238.637511)"
+      ]
+    },
+    {
+      "idx": 41,
+      "file": "/login-svg/img-41.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 99.0,
+      "height": 100.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 99,
+      "png_h": 100,
+      "bytes": 10177,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 587.79176, 298.616262)"
+      ]
+    },
+    {
+      "idx": 42,
+      "file": "/login-svg/img-42.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 119.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 119,
+      "png_h": 81,
+      "bytes": 10169,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 557.802385, 387.834655)"
+      ]
+    },
+    {
+      "idx": 43,
+      "file": "/login-svg/img-43.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 99.0,
+      "height": 80.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 99,
+      "png_h": 80,
+      "bytes": 8896,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 146.94794, 447.813406)"
+      ]
+    },
+    {
+      "idx": 44,
+      "file": "/login-svg/img-44.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 60.0,
+      "height": 41.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 60,
+      "png_h": 41,
+      "bytes": 3200,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 14.244953, 492.047735)"
+      ]
+    },
+    {
+      "idx": 45,
+      "file": "/login-svg/img-45.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 217.0,
+      "height": 180.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 217,
+      "png_h": 180,
+      "bytes": 37080,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 58.479282, 507.042422)"
+      ]
+    },
+    {
+      "idx": 46,
+      "file": "/login-svg/img-46.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 99.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 99,
+      "png_h": 81,
+      "bytes": 8082,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 0, 641.244878)"
+      ]
+    },
+    {
+      "idx": 47,
+      "file": "/login-svg/img-47.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 256.0,
+      "height": 181.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 256,
+      "png_h": 181,
+      "bytes": 48083,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 249.661551, 477.053047)"
+      ]
+    },
+    {
+      "idx": 48,
+      "file": "/login-svg/img-48.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 216.0,
+      "height": 200.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 216,
+      "png_h": 200,
+      "bytes": 44363,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 470.083461, 432.818718)"
+      ]
+    },
+    {
+      "idx": 49,
+      "file": "/login-svg/img-49.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 118.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 118,
+      "png_h": 81,
+      "bytes": 10698,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 617.031401, 522.03711)"
+      ]
+    },
+    {
+      "idx": 50,
+      "file": "/login-svg/img-50.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 433.0,
+      "height": 61.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 433,
+      "png_h": 61,
+      "bytes": 21272,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 190.432535, 701.223629)"
+      ]
+    },
+    {
+      "idx": 51,
+      "file": "/login-svg/img-51.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 157.0,
+      "height": 160.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 157,
+      "png_h": 160,
+      "bytes": 27903,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 587.79176, 626.999924)"
+      ]
+    },
+    {
+      "idx": 52,
+      "file": "/login-svg/img-52.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 707.0,
+      "height": 140.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 707,
+      "png_h": 140,
+      "bytes": 40432,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 87.718923, 761.20238)"
+      ]
+    },
+    {
+      "idx": 53,
+      "file": "/login-svg/img-53.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 80.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 80,
+      "png_h": 81,
+      "bytes": 5961,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 161.192893, 790.442021)"
+      ]
+    },
+    {
+      "idx": 54,
+      "file": "/login-svg/img-54.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 59.0,
+      "height": 41.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 59,
+      "png_h": 41,
+      "bytes": 1651,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 146.94794, 865.41546)"
+      ]
+    },
+    {
+      "idx": 55,
+      "file": "/login-svg/img-55.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 60.0,
+      "height": 41.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 60,
+      "png_h": 41,
+      "bytes": 1891,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 161.192893, 969.62854)"
+      ]
+    },
+    {
+      "idx": 56,
+      "file": "/login-svg/img-56.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 40.0,
+      "height": 41.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 40,
+      "png_h": 41,
+      "bytes": 1815,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 499.323102, 969.62854)"
+      ]
+    },
+    {
+      "idx": 57,
+      "file": "/login-svg/img-57.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 237.0,
+      "height": 220.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 237,
+      "png_h": 220,
+      "bytes": 55713,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 43.484595, 999.617915)"
+      ]
+    },
+    {
+      "idx": 58,
+      "file": "/login-svg/img-58.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 256.0,
+      "height": 220.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 256,
+      "png_h": 220,
+      "bytes": 70456,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 249.661551, 999.617915)"
+      ]
+    },
+    {
+      "idx": 59,
+      "file": "/login-svg/img-59.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 256.0,
+      "height": 220.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 256,
+      "png_h": 220,
+      "bytes": 72346,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 455.088774, 999.617915)"
+      ]
+    },
+    {
+      "idx": 60,
+      "file": "/login-svg/img-60.png",
+      "x": 0.0,
+      "y": 0.0,
+      "width": 99.0,
+      "height": 81.0,
+      "transform": {
+        "raw": ""
+      },
+      "png_w": 99,
+      "png_h": 81,
+      "bytes": 6918,
+      "transform_chain": [
+        "matrix(0.749734, 0, 0, 0.749734, 631.276355, 1178.804434)"
+      ]
+    }
+  ]
+}

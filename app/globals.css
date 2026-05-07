@@ -15,3 +15,85 @@ body {
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
+
+/* ステッカー風の白縁 + 影（モックアップ準拠の質感） */
+.sticker {
+  background: #fff;
+  border-radius: 9999px;
+  padding: 4px;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* ふちありの大きいステッカー（ロゴや育成カード用） */
+.sticker-card {
+  background: #fff;
+  border-radius: 28px;
+  padding: 8px;
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.08),
+    0 12px 32px rgba(0, 0, 0, 0.05);
+}
+
+/* 吹き出し（ピンク + 白破線縁） */
+.bubble-pink {
+  background: #FF8FA8;
+  color: #fff;
+  border-radius: 36px;
+  border: 4px dashed #fff;
+  box-shadow:
+    0 0 0 6px #FF8FA8,
+    0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 1.25rem 2rem;
+  position: relative;
+}
+
+/* 吹き出しのしっぽ（下） */
+.bubble-pink::after {
+  content: "";
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 28px;
+  height: 28px;
+  background: #FF8FA8;
+  box-shadow: 0 0 0 6px #FF8FA8;
+  border-radius: 4px;
+}
+
+/* バウンスアニメーション（ステッカーゆらゆら） */
+@keyframes wobble {
+  0%, 100% { transform: rotate(var(--r, 0deg)); }
+  50% { transform: rotate(calc(var(--r, 0deg) + 4deg)); }
+}
+.wobble {
+  animation: wobble 3s ease-in-out infinite;
+}
+
+/* リボン（黄色バナー） */
+.ribbon {
+  position: relative;
+  background: #FFD668;
+  color: #6B4F1D;
+  font-weight: 800;
+  padding: 4px 18px;
+  border-radius: 4px;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.ribbon::before,
+.ribbon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  background: #FFD668;
+  border: 3px solid #fff;
+  transform: translateY(-50%) rotate(45deg);
+  z-index: -1;
+}
+.ribbon::before { left: -10px; }
+.ribbon::after { right: -10px; }
