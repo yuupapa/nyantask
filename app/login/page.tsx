@@ -78,44 +78,7 @@ export default function LoginPage() {
           </div>
         ))}
 
-        {/* 吹き出し内のキャッチコピー（円形部分に flex 中央配置） */}
-        <div
-          style={{
-            position: "absolute",
-            left: pct(131.95, "w"),
-            top: pct(TEXT_CONFIG.bubbleTop, "h"),
-            width: pct(441.59, "w"),
-            height: pct(TEXT_CONFIG.bubbleCircleH, "h"),
-            zIndex: 10,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <p
-            className="font-extrabold leading-none"
-            style={{
-              color: "#FFE066",
-              fontSize: `clamp(${TEXT_CONFIG.subFontMin}px, ${TEXT_CONFIG.subFontVw}vw, ${TEXT_CONFIG.subFontMax}px)`,
-              WebkitTextStroke: "0.5px white",
-              textShadow: "0 2px 0 #fff, 0 4px 6px rgba(0,0,0,0.08)",
-            }}
-          >
-            ToDoしながら、
-          </p>
-          <h1
-            className="font-extrabold leading-tight mt-1"
-            style={{
-              color: "#fff",
-              fontSize: `clamp(${TEXT_CONFIG.mainFontMin}px, ${TEXT_CONFIG.mainFontVw}vw, ${TEXT_CONFIG.mainFontMax}px)`,
-              textShadow: "0 3px 0 rgba(0,0,0,0.15), 0 6px 10px rgba(0,0,0,0.1)",
-              letterSpacing: "0.02em",
-            }}
-          >
-            ねこ集め！
-          </h1>
-        </div>
+        {/* 吹き出しテキストは img-35 に焼き込み済みのため HTML オーバーレイ不要 */}
 
         {/* ─────────────────────────────────
             「にゃんタスク」ロゴ（リボンの上）
@@ -145,34 +108,7 @@ export default function LoginPage() {
           </h2>
         </div>
 
-        {/* ─────────────────────────────────
-            黄色リボン上のテキスト
-            （リボン: x:190.43 y:701.22 w:324.63 h:45.73）
-        ───────────────────────────────── */}
-        <div
-          style={{
-            position: "absolute",
-            left: pct(190.43, "w"),
-            top: pct(701.22, "h"),
-            width: pct(324.63, "w"),
-            height: pct(45.73, "h"),
-            zIndex: 10,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <span
-            className="font-extrabold"
-            style={{
-              color: "#6B4F1D",
-              fontSize: "clamp(13px, 3.4vw, 16px)",
-              letterSpacing: "0.03em",
-            }}
-          >
-            ToDo × 猫育成アプリ
-          </span>
-        </div>
+        {/* リボンテキストは img-50 に焼き込み済みのため HTML オーバーレイ不要 */}
 
         {/* ─────────────────────────────────
             Google ログインボタン
