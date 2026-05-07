@@ -135,3 +135,42 @@ export type Cat = {
   last_decay_at: string;
   created_at: string;
 };
+
+// ============================================================
+// ショップ
+// ============================================================
+
+export const SHOP_CATEGORIES = ["food", "furniture", "toy"] as const;
+export type ShopCategory = (typeof SHOP_CATEGORIES)[number];
+
+export const SHOP_CATEGORY_LABELS: Record<ShopCategory, string> = {
+  food: "ごはん",
+  furniture: "インテリア",
+  toy: "おもちゃ",
+};
+
+export const SHOP_CATEGORY_EMOJI: Record<ShopCategory, string> = {
+  food: "🍽️",
+  furniture: "🪑",
+  toy: "🧸",
+};
+
+export type ShopItem = {
+  id: string;
+  category: ShopCategory;
+  slug: string;
+  name: string;
+  description: string | null;
+  price: number;
+  effect_type: "hunger" | "mood" | "xp" | null;
+  effect_value: number;
+  sort_order: number;
+};
+
+export type UserItem = {
+  id: string;
+  user_id: string;
+  item_id: string;
+  quantity: number;
+  created_at: string;
+};

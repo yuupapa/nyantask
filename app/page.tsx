@@ -99,6 +99,13 @@ export default async function Home() {
           </Link>
 
           <Link
+            href="/shop"
+            className="px-6 py-2 bg-yellow-50 border border-yellow-300 text-yellow-800 rounded-full hover:bg-yellow-100 transition font-semibold text-center"
+          >
+            🛒 ショップ
+          </Link>
+
+          <Link
             href="/cats"
             className="px-6 py-2 bg-white/80 border border-gray-300 text-gray-700 rounded-full hover:bg-white transition font-semibold text-center"
           >
