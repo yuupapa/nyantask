@@ -19,7 +19,7 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#FF7B9C",
     lang: "ja",
     categories: ["productivity", "lifestyle"],
-    // icon.tsx / apple-icon.tsx で生成されるアイコンが Next.js により自動的に
-    // manifest にも反映される（Next.js 14+ の動作）。明示指定は不要。
-  };
+    // Chrome Web Push (FCM) に必要な固定値
+    gcm_sender_id: "103953800507",
+  } as MetadataRoute.Manifest & { gcm_sender_id: string };
 }
