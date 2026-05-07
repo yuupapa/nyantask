@@ -34,7 +34,7 @@ export const DECOR_ASSETS: LoginAsset[] = [
   { idx: 48, key: "cat_face_orange", src: "/login-svg/img-48.png", x: 470.08, y: 432.82, w: 161.94, h: 149.95, z: 4 },
   { idx: 49, key: "paw_mint", src: "/login-svg/img-49.png", x: 617.03, y: 522.04, w: 88.47, h: 60.73, z: 5 },
   { idx: 51, key: "cat_face_calico", src: "/login-svg/img-51.png", x: 587.79, y: 627.0, w: 117.71, h: 119.96, z: 4 },
-  { idx: 50, key: "ribbon_yellow", src: "/login-svg/img-50.png", x: 190.43, y: 701.22, w: 324.63, h: 45.73, z: 6 },
+  { idx: 50, key: "ribbon_yellow", src: "/login-svg/img-50.png", x: 183.75, y: 694.50, w: 368.25, h: 57.75, z: 6 },
   { idx: 55, key: "smile_mark_left", src: "/login-svg/img-55.png", x: 161.19, y: 969.63, w: 44.98, h: 30.74, z: 5 },
   { idx: 56, key: "smile_mark_right", src: "/login-svg/img-56.png", x: 499.32, y: 969.63, w: 29.99, h: 30.74, z: 5 },
   { idx: 57, key: "feature_clipboard", src: "/login-svg/img-57.png", x: 43.48, y: 999.62, w: 177.69, h: 164.94, z: 4 },
