@@ -3,13 +3,7 @@
 import { createClient } from "@/lib/supabase/client";
 import { useState } from "react";
 import Image from "next/image";
-import {
-  PawSticker,
-  StarSticker,
-  FishSticker,
-  YarnSticker,
-  CatStickerFrame,
-} from "@/app/_components/Stickers";
+import { DECOR_ASSETS, LOGIN_VIEWBOX, pct } from "./_assets";
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
@@ -32,80 +26,154 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-nyan-cream relative overflow-hidden">
-      <div className="relative z-10 max-w-md mx-auto min-h-screen flex flex-col items-center px-4">
+    <main className="min-h-screen bg-nyan-cream flex items-start justify-center">
+      <div
+        className="relative w-full"
+        style={{
+          maxWidth: 440,
+          aspectRatio: `${LOGIN_VIEWBOX.w} / ${LOGIN_VIEWBOX.h}`,
+        }}
+      >
         {/* ─────────────────────────────────
-            上部：吹き出し + 装飾ステッカー
+            背景アセット（モックアップそのまま）
         ───────────────────────────────── */}
-        <div className="relative w-full pt-12 pb-2">
-          {/* 散りばめステッカー（吹き出しの周り） */}
-          <PawSticker size={48} rotate={-20} className="absolute top-6 left-2" color="#FFB5C5" />
-          <StarSticker size={32} rotate={15} className="absolute top-2 left-20" color="#FFD668" />
-          <YarnSticker size={42} rotate={0} className="absolute top-4 right-12" />
-          <StarSticker size={26} rotate={-12} className="absolute top-20 right-2" color="#A8D8FF" />
-          <PawSticker size={36} rotate={20} className="absolute top-32 right-2" color="#B5E8D5" />
-          <StarSticker size={22} rotate={25} className="absolute top-28 left-1" color="#B5E8D5" />
-
-          {/* 吹き出し本体 */}
-          <div className="relative mx-auto w-[78%] mt-2">
-            <div className="bubble-pink text-center">
-              <p className="text-lg font-extrabold tracking-wide" style={{ color: "#FFE799" }}>
-                ToDoしながら、
-              </p>
-              <p className="text-3xl font-extrabold tracking-wider mt-1" style={{ color: "#fff" }}>
-                ねこ集め！
-              </p>
-            </div>
+        {DECOR_ASSETS.map((a) => (
+          <div
+            key={a.idx}
+            style={{
+              position: "absolute",
+              left: pct(a.x, "w"),
+              top: pct(a.y, "h"),
+              width: pct(a.w, "w"),
+              height: pct(a.h, "h"),
+              zIndex: a.z ?? 1,
+            }}
+          >
+            <Image
+              src={a.src}
+              alt=""
+              fill
+              style={{ objectFit: "contain" }}
+              priority={a.key === "speech_bubble" || a.key.startsWith("cat_")}
+            />
           </div>
+        ))}
+
+        {/* ─────────────────────────────────
+            吹き出し内のキャッチコピー
+            （吹き出し: x:131.95 y:74.45 w:441.59 h:418.35）
+        ───────────────────────────────── */}
+        <div
+          style={{
+            position: "absolute",
+            left: pct(131.95 + 30, "w"),
+            top: pct(74.45 + 90, "h"),
+            width: pct(441.59 - 60, "w"),
+            zIndex: 10,
+            textAlign: "center",
+          }}
+        >
+          <p
+            className="font-extrabold leading-none"
+            style={{
+              color: "#FFE066",
+              fontSize: "clamp(20px, 5.6vw, 28px)",
+              WebkitTextStroke: "0.5px white",
+              textShadow: "0 2px 0 #fff, 0 4px 6px rgba(0,0,0,0.08)",
+            }}
+          >
+            ToDoしながら、
+          </p>
+          <h1
+            className="font-extrabold leading-tight mt-1"
+            style={{
+              color: "#fff",
+              fontSize: "clamp(36px, 10vw, 52px)",
+              textShadow: "0 3px 0 rgba(0,0,0,0.15), 0 6px 10px rgba(0,0,0,0.1)",
+              letterSpacing: "0.02em",
+            }}
+          >
+            ねこ集め！
+          </h1>
         </div>
 
         {/* ─────────────────────────────────
-            中央：猫イラスト散りばめ + ロゴ
+            「にゃんタスク」ロゴ（リボンの上）
         ───────────────────────────────── */}
-        <div className="relative w-full mt-10 mb-2">
-          {/* 周辺の猫ステッカーたち（左右） */}
-          <div className="absolute left-0 top-2">
-            <CatStickerFrame size={68} rotate={-8}>
-              <Image src="/cats/cat-005.png" alt="" width={68} height={68} className="object-contain" />
-            </CatStickerFrame>
-          </div>
-
-          <div className="absolute right-0 top-1">
-            <CatStickerFrame size={64} rotate={10}>
-              <Image src="/cats/cat-018.png" alt="" width={64} height={64} className="object-contain" />
-            </CatStickerFrame>
-          </div>
-
-          <FishSticker size={40} rotate={-15} className="absolute top-12 left-16" color="#FFB466" />
-          <FishSticker size={38} rotate={10} className="absolute top-14 right-20" color="#5DAEE8" />
-
-          {/* 真ん中の覗き込む黒猫 */}
-          <div className="flex justify-center pt-12">
-            <CatStickerFrame size={120} rotate={0}>
-              <Image src="/cats/cat-002.png" alt="" width={120} height={120} className="object-contain" />
-            </CatStickerFrame>
-          </div>
-
-          {/* 「にゃんタスク」ロゴ */}
-          <div className="text-center mt-3">
-            <h1 className="text-5xl font-black tracking-tight inline-block" style={{ fontFamily: "'Hiragino Maru Gothic ProN', 'Yu Gothic UI', sans-serif" }}>
-              <span style={{ color: "#FF8FA8" }}>にゃん</span>
-              <span style={{ color: "#5DAEE8" }}>タスク</span>
-            </h1>
-            <div className="flex justify-center mt-3">
-              <span className="ribbon text-xs">ToDo × 猫育成アプリ</span>
-            </div>
-          </div>
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: pct(605, "h"),
+            zIndex: 8,
+            textAlign: "center",
+          }}
+        >
+          <h2
+            className="font-black tracking-tight inline-block"
+            style={{
+              fontSize: "clamp(40px, 11vw, 60px)",
+              fontFamily:
+                "'Hiragino Maru Gothic ProN', 'Yu Gothic UI', sans-serif",
+              textShadow: "3px 3px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 0 6px 12px rgba(0,0,0,0.1)",
+              lineHeight: 1,
+            }}
+          >
+            <span style={{ color: "#FF8FA8" }}>にゃん</span>
+            <span style={{ color: "#5DAEE8" }}>タスク</span>
+          </h2>
         </div>
 
         {/* ─────────────────────────────────
-            ログインボタン
+            黄色リボン上のテキスト
+            （リボン: x:190.43 y:701.22 w:324.63 h:45.73）
         ───────────────────────────────── */}
-        <div className="w-full max-w-xs mt-8">
+        <div
+          style={{
+            position: "absolute",
+            left: pct(190.43, "w"),
+            top: pct(701.22, "h"),
+            width: pct(324.63, "w"),
+            height: pct(45.73, "h"),
+            zIndex: 10,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <span
+            className="font-extrabold"
+            style={{
+              color: "#6B4F1D",
+              fontSize: "clamp(13px, 3.4vw, 16px)",
+              letterSpacing: "0.03em",
+            }}
+          >
+            ToDo × 猫育成アプリ
+          </span>
+        </div>
+
+        {/* ─────────────────────────────────
+            Google ログインボタン
+        ───────────────────────────────── */}
+        <div
+          style={{
+            position: "absolute",
+            left: pct(70, "w"),
+            top: pct(770, "h"),
+            width: pct(565, "w"),
+            zIndex: 10,
+          }}
+        >
           <button
             onClick={handleGoogleLogin}
             disabled={loading}
-            className="w-full px-6 py-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-3 disabled:opacity-50 border border-gray-100"
+            className="w-full bg-white rounded-full shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-3 disabled:opacity-50 border border-gray-100 active:scale-[0.98]"
+            style={{
+              padding: "14px 24px",
+              fontSize: "clamp(15px, 3.8vw, 18px)",
+            }}
           >
             <svg width="22" height="22" viewBox="0 0 48 48">
               <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z" />
@@ -113,7 +181,7 @@ export default function LoginPage() {
               <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z" />
               <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z" />
             </svg>
-            <span className="font-bold text-gray-800 text-base">
+            <span className="font-bold text-gray-800">
               {loading ? "ログイン中..." : "Googleでログイン"}
             </span>
           </button>
@@ -122,7 +190,10 @@ export default function LoginPage() {
             <p className="mt-3 text-red-600 text-sm text-center">エラー: {error}</p>
           )}
 
-          <p className="mt-3 text-[11px] text-gray-500 text-center leading-relaxed flex items-center justify-center gap-1">
+          <p
+            className="text-center text-gray-500 leading-relaxed flex items-center justify-center gap-1 flex-wrap"
+            style={{ fontSize: "clamp(10px, 2.6vw, 12px)", marginTop: "10px" }}
+          >
             <span>🔒</span>
             <span>
               ログインすると、
@@ -134,63 +205,73 @@ export default function LoginPage() {
         </div>
 
         {/* ─────────────────────────────────
-            下部：にゃんタスクでできること
+            「にゃんタスクでできること」見出し
+            （smile_mark の間。y ≈ 969 付近）
         ───────────────────────────────── */}
-        <div className="w-full mt-auto pt-8 pb-10">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="text-nyan-pink-deep">✿</span>
-            <h2 className="text-base font-bold text-gray-700">にゃんタスクでできること</h2>
-            <span className="text-nyan-pink-deep">✿</span>
-          </div>
-          <div className="grid grid-cols-3 gap-3">
-            <FeatureCard
-              catId={5}
-              icon="📋"
-              title="やること管理"
-              desc="タスクを整理して、毎日をもっとスッキリ！"
-            />
-            <FeatureCard
-              catId={18}
-              icon="🐟"
-              title="育成"
-              desc="タスクをこなしてねこを育てよう！"
-            />
-            <FeatureCard
-              catId={42}
-              icon="📖"
-              title="図鑑"
-              desc="集めたねこを図鑑にコレクション！"
-            />
-          </div>
-          <PawSticker size={28} rotate={-15} className="absolute bottom-6 right-4" color="#B5E8D5" />
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: pct(960, "h"),
+            zIndex: 10,
+            textAlign: "center",
+          }}
+        >
+          <h3
+            className="font-bold text-gray-700 inline-block"
+            style={{ fontSize: "clamp(13px, 3.6vw, 16px)" }}
+          >
+            にゃんタスクでできること
+          </h3>
         </div>
+
+        {/* ─────────────────────────────────
+            機能カードのテキスト（クリップボード/猫魚/本の下）
+            features は y=999 開始、h=164.94 → 文字は 1170 付近
+        ───────────────────────────────── */}
+        <FeatureLabel x={43.48} w={177.69} title="やること管理" desc="タスクを整理して、毎日をもっとスッキリ！" />
+        <FeatureLabel x={249.66} w={191.93} title="育成" desc="タスクをこなしてねこを育てよう！" />
+        <FeatureLabel x={455.09} w={191.93} title="図鑑" desc="集めたねこを図鑑にコレクション！" />
       </div>
     </main>
   );
 }
 
-function FeatureCard({
-  catId,
-  icon,
+function FeatureLabel({
+  x,
+  w,
   title,
   desc,
 }: {
-  catId: number;
-  icon: string;
+  x: number;
+  w: number;
   title: string;
   desc: string;
 }) {
-  const src = `/cats/cat-${String(catId).padStart(3, "0")}.png`;
   return (
-    <div className="bg-white rounded-3xl p-3 shadow-md border border-gray-100">
-      <div className="relative h-20 flex items-center justify-center">
-        <span className="absolute top-0 left-1 text-2xl z-10">{icon}</span>
-        <CatStickerFrame size={56}>
-          <Image src={src} alt={title} width={56} height={56} className="object-contain" />
-        </CatStickerFrame>
-      </div>
-      <p className="text-xs font-extrabold text-gray-800 mt-1 text-center">{title}</p>
-      <p className="text-[10px] text-gray-500 mt-1 text-center leading-tight">{desc}</p>
+    <div
+      style={{
+        position: "absolute",
+        left: pct(x, "w"),
+        top: pct(1180, "h"),
+        width: pct(w, "w"),
+        zIndex: 10,
+        textAlign: "center",
+      }}
+    >
+      <p
+        className="font-extrabold text-gray-800"
+        style={{ fontSize: "clamp(11px, 2.8vw, 13px)" }}
+      >
+        {title}
+      </p>
+      <p
+        className="text-gray-500 leading-tight mt-0.5"
+        style={{ fontSize: "clamp(9px, 2.2vw, 11px)" }}
+      >
+        {desc}
+      </p>
     </div>
   );
 }
