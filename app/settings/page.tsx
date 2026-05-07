@@ -1,6 +1,7 @@
 import { requireAuth } from "@/lib/auth";
 import { ApiKeyForm } from "./_components/ApiKeyForm";
 import { PushSubscribeButton } from "./_components/PushSubscribeButton";
+import { LogoutButton } from "./_components/LogoutButton";
 import { AuthShell } from "@/app/_components/AuthShell";
 
 export const dynamic = "force-dynamic";
@@ -57,6 +58,9 @@ export default async function SettingsPage() {
               <dd>{profile.role === "admin" ? "管理者" : "一般"}</dd>
             </div>
           </dl>
+          <div className="mt-4 pt-4 border-t border-gray-100">
+            <LogoutButton />
+          </div>
         </section>
       </div>
     </main>
