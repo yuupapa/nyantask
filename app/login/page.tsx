@@ -5,6 +5,25 @@ import { useState } from "react";
 import Image from "next/image";
 import { DECOR_ASSETS, LOGIN_VIEWBOX, pct } from "./_assets";
 
+// ============================================================
+// テキスト位置・サイズ調整（ここの数値を変えれば位置が動く）
+// 単位はすべて viewBox 座標（幅 705.75 × 高さ 1254）
+// ============================================================
+const TEXT_CONFIG = {
+  // 吹き出し円形エリアの開始 Y（吹き出し画像の top と同じ値）
+  bubbleTop: 74.45,
+  // 吹き出し円形エリアの高さ（大きくすると中心が下に下がる）
+  bubbleCircleH: 380,
+  // 「ToDoしながら、」のフォントサイズ clamp(min, vw, max)
+  subFontMin: 20,   // px
+  subFontVw: 5.6,   // vw
+  subFontMax: 28,   // px
+  // 「ねこ集め！」のフォントサイズ clamp(min, vw, max)
+  mainFontMin: 42,  // px ← ここを増やすと大きくなる
+  mainFontVw: 11.5, // vw
+  mainFontMax: 58,  // px
+};
+
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -64,9 +83,9 @@ export default function LoginPage() {
           style={{
             position: "absolute",
             left: pct(131.95, "w"),
-            top: pct(74.45, "h"),
+            top: pct(TEXT_CONFIG.bubbleTop, "h"),
             width: pct(441.59, "w"),
-            height: pct(380, "h"),
+            height: pct(TEXT_CONFIG.bubbleCircleH, "h"),
             zIndex: 10,
             display: "flex",
             flexDirection: "column",
@@ -78,7 +97,7 @@ export default function LoginPage() {
             className="font-extrabold leading-none"
             style={{
               color: "#FFE066",
-              fontSize: "clamp(20px, 5.6vw, 28px)",
+              fontSize: `clamp(${TEXT_CONFIG.subFontMin}px, ${TEXT_CONFIG.subFontVw}vw, ${TEXT_CONFIG.subFontMax}px)`,
               WebkitTextStroke: "0.5px white",
               textShadow: "0 2px 0 #fff, 0 4px 6px rgba(0,0,0,0.08)",
             }}
@@ -89,7 +108,7 @@ export default function LoginPage() {
             className="font-extrabold leading-tight mt-1"
             style={{
               color: "#fff",
-              fontSize: "clamp(42px, 11.5vw, 58px)",
+              fontSize: `clamp(${TEXT_CONFIG.mainFontMin}px, ${TEXT_CONFIG.mainFontVw}vw, ${TEXT_CONFIG.mainFontMax}px)`,
               textShadow: "0 3px 0 rgba(0,0,0,0.15), 0 6px 10px rgba(0,0,0,0.1)",
               letterSpacing: "0.02em",
             }}
