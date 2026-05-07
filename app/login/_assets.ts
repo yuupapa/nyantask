@@ -29,7 +29,6 @@ export const DECOR_ASSETS: LoginAsset[] = [
   { idx: 42, key: "fish_blue", src: "/login-svg/img-42.png", x: 557.8, y: 387.83, w: 89.22, h: 60.73, z: 5 },
   { idx: 43, key: "fish_yellow", src: "/login-svg/img-43.png", x: 146.95, y: 447.81, w: 74.22, h: 59.98, z: 5 },
   { idx: 44, key: "star_yellow_small", src: "/login-svg/img-44.png", x: 14.24, y: 492.05, w: 44.98, h: 30.74, z: 5 },
-  { idx: 45, key: "cat_face_white", src: "/login-svg/img-45.png", x: 58.48, y: 507.04, w: 162.69, h: 134.95, z: 4 },
   { idx: 46, key: "star_pink", src: "/login-svg/img-46.png", x: 0.0, y: 641.24, w: 74.22, h: 60.73, z: 5 },
   { idx: 47, key: "cat_face_blackpeek", src: "/login-svg/img-47.png", x: 249.66, y: 477.05, w: 191.93, h: 135.7, z: 4 },
   { idx: 48, key: "cat_face_orange", src: "/login-svg/img-48.png", x: 470.08, y: 432.82, w: 161.94, h: 149.95, z: 4 },
