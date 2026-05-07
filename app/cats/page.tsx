@@ -16,7 +16,7 @@ export default async function CatsPage() {
   const { data: allCats } = await supabase
     .from("cats")
     .select(
-      "id, user_id, name, pattern, face, personality, rarity, hunger, mood, friendship_xp, is_active, is_runaway, born_at, last_decay_at, created_at"
+      "id, user_id, name, visual_id, pattern, face, personality, rarity, hunger, mood, friendship_xp, is_active, is_runaway, born_at, last_decay_at, created_at"
     )
     .eq("user_id", profile.id)
     .order("born_at", { ascending: false });

@@ -1,7 +1,6 @@
 import type { Cat } from "@/lib/types";
 import {
   getPatternLabel,
-  getPatternEmoji,
   getFaceLabel,
   getPersonalityLabel,
 } from "@/lib/cat-traits";
@@ -21,6 +20,7 @@ import {
 import { PetCatButton } from "./PetCatButton";
 import { CatTalkButton } from "./CatTalkButton";
 import { CatNameEditor } from "./CatNameEditor";
+import { CatImage } from "./CatImage";
 
 type Props = {
   cat: Cat;
@@ -67,11 +67,15 @@ export function CatCard({ cat, pawBalance, hasApiKey }: Props) {
         </div>
       </div>
 
-      {/* 中央：絵文字（プレースホルダ） */}
-      <div className="flex items-center justify-center my-6 relative">
-        <div className="text-7xl drop-shadow-md">
-          {getPatternEmoji(cat.pattern)}
-        </div>
+      {/* 中央：猫イラスト */}
+      <div className="flex items-center justify-center my-4 relative">
+        <CatImage
+          visualId={cat.visual_id}
+          pattern={cat.pattern}
+          face={cat.face}
+          status={status}
+          size={160}
+        />
         {APPEARANCE_DECORATIONS[appearance] && (
           <div className="absolute top-0 right-1/4 text-3xl animate-pulse">
             {APPEARANCE_DECORATIONS[appearance]}

@@ -122,6 +122,7 @@ export type Cat = {
   id: string;
   user_id: string;
   name: string;
+  visual_id: number;
   pattern: string;
   face: string;
   personality: string;
@@ -135,6 +136,8 @@ export type Cat = {
   last_decay_at: string;
   created_at: string;
 };
+
+export const CAT_VISUAL_COUNT = 100;
 
 // ============================================================
 // ショップ

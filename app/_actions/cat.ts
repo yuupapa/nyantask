@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { requireAuth } from "@/lib/auth";
 import type { Cat } from "@/lib/types";
+import { CAT_VISUAL_COUNT } from "@/lib/types";
 import { generateRandomTraits } from "@/lib/cat-traits";
 import {
   calculateDecay,
@@ -29,7 +30,7 @@ export async function getOrCreateActiveCat(): Promise<Cat> {
   const { data: existing } = await supabase
     .from("cats")
     .select(
-      "id, user_id, name, pattern, face, personality, rarity, hunger, mood, friendship_xp, is_active, is_runaway, born_at, last_decay_at, created_at"
+      "id, user_id, name, visual_id, pattern, face, personality, rarity, hunger, mood, friendship_xp, is_active, is_runaway, born_at, last_decay_at, created_at"
     )
     .eq("user_id", profile.id)
     .eq("is_active", true)
@@ -41,17 +42,19 @@ export async function getOrCreateActiveCat(): Promise<Cat> {
   } else {
     // 初回猫を付与
     const traits = generateRandomTraits();
+    const visualId = Math.floor(Math.random() * CAT_VISUAL_COUNT) + 1;
     const { data: created, error: createError } = await supabase
       .from("cats")
       .insert({
         user_id: profile.id,
+        visual_id: visualId,
         pattern: traits.pattern,
         face: traits.face,
         personality: traits.personality,
         rarity: traits.rarity,
       })
       .select(
-        "id, user_id, name, pattern, face, personality, rarity, hunger, mood, friendship_xp, is_active, is_runaway, born_at, last_decay_at, created_at"
+        "id, user_id, name, visual_id, pattern, face, personality, rarity, hunger, mood, friendship_xp, is_active, is_runaway, born_at, last_decay_at, created_at"
       )
       .single();
 
@@ -74,7 +77,7 @@ export async function getOrCreateActiveCat(): Promise<Cat> {
       })
       .eq("id", cat.id)
       .select(
-        "id, user_id, name, pattern, face, personality, rarity, hunger, mood, friendship_xp, is_active, is_runaway, born_at, last_decay_at, created_at"
+        "id, user_id, name, visual_id, pattern, face, personality, rarity, hunger, mood, friendship_xp, is_active, is_runaway, born_at, last_decay_at, created_at"
       )
       .single();
 
@@ -304,8 +307,10 @@ export async function summonNewCat(): Promise<void> {
 
   // 新しい猫を生成
   const traits = generateRandomTraits();
+  const visualId = Math.floor(Math.random() * CAT_VISUAL_COUNT) + 1;
   const { error: insertError } = await supabase.from("cats").insert({
     user_id: profile.id,
+    visual_id: visualId,
     pattern: traits.pattern,
     face: traits.face,
     personality: traits.personality,
