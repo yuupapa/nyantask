@@ -167,7 +167,17 @@ DATABASE_PASSWORD=Step 1-3 で設定したパスワード
    GEMINI_API_KEY=AIzaSyXXXXXXXXXXXXXXXXXXXXXXXX
    ```
 
-⚠️ このキーは個人用です。本番ではユーザーが各自のキーを Supabase Vault に入れる仕組みになります。
+⚠️ このキーは個人用です。本番ではユーザーが各自のキーをアプリの設定画面から登録します。
+
+### Gemini API キーの変更・ローテーション推奨タイミング
+
+| タイミング | 対応 |
+|-----------|------|
+| **Phase 2 開始前**（コンサル生展開前）| Supabase Vault への移行を実施（現在は平文保存） |
+| **漏洩疑いが生じたとき** | Google AI Studio で即時削除→再発行→設定画面で再登録 |
+| **定期メンテ**（3〜6ヶ月ごと推奨） | Google AI Studio で利用状況を確認し、不審なリクエストがあればローテーション |
+
+> 🔗 キーの確認・削除はこちら：https://aistudio.google.com/apikey
 
 ---
 
@@ -208,10 +218,113 @@ DATABASE_PASSWORD=Step 1-3 で設定したパスワード
 
 ---
 
+## Step 7：Supabase Migration の適用（Phase 1 コード実装後）
+
+> このステップは、Next.js 雛形作成 → コード実装（Phase 1.1 以降）が完了した後に実施してください。
+> 所要時間：3〜5分
+
+### 概要
+Gemini API キー保存・Web Push 機能を有効にするため、Supabase にテーブル・カラムを追加します。
+以下2つの SQL マイグレーションを手動実行します。
+
+### 7-1. SQL Editor を開く
+1. Supabase ダッシュボード左メニュー「**SQL Editor**」をクリック
+2. 「**New Query**」をクリック（新規 SQL ウィンドウ作成）
+
+### 7-2. Migration 1 を実行：Gemini API キーのカラム追加
+
+以下の SQL をコピーして SQL Editor に貼り付けて実行（再生ボタンをクリック）：
+
+```sql
+-- ============================================================
+-- にゃんタスク マイグレーション 6
+-- 2026-05-03 - Gemini API キーをユーザー単位で保持
+-- ============================================================
+
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS gemini_api_key TEXT;
+```
+
+**確認：** エラーが表示されず、メッセージ「1 row」または成功表示が出れば OK ✅
+
+### 7-3. Migration 2 を実行：Web Push 購読テーブル作成
+
+新規 SQL クエリウィンドウで以下をコピー・実行：
+
+```sql
+-- ============================================================
+-- にゃんタスク マイグレーション 7
+-- 2026-05-03 - Web Push 購読情報
+-- ============================================================
+
+DROP TABLE IF EXISTS push_subscriptions CASCADE;
+
+CREATE TABLE push_subscriptions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  endpoint TEXT NOT NULL,
+  p256dh TEXT NOT NULL,
+  auth_secret TEXT NOT NULL,
+  user_agent TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE(user_id, endpoint)
+);
+
+CREATE INDEX idx_push_subs_user ON push_subscriptions(user_id);
+
+-- ============================================================
+-- RLS
+-- ============================================================
+ALTER TABLE push_subscriptions ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "push_subs_select_own_or_admin" ON push_subscriptions
+  FOR SELECT USING (auth.uid() = user_id OR is_admin());
+
+CREATE POLICY "push_subs_insert_own" ON push_subscriptions
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "push_subs_delete_own_or_admin" ON push_subscriptions
+  FOR DELETE USING (auth.uid() = user_id OR is_admin());
+
+-- ============================================================
+-- GRANT
+-- ============================================================
+GRANT SELECT, INSERT, DELETE ON public.push_subscriptions TO authenticated;
+GRANT ALL ON public.push_subscriptions TO service_role;
+```
+
+**確認：** エラーなく実行完了 ✅
+
+### 7-4. 動作確認
+
+dev サーバーが起動している場合、**ブラウザをリロード**（F5）してから以下を確認：
+
+#### 確認1: Gemini API キー入力フォーム表示
+1. アプリにログイン → ⚙️ 設定ページを開く
+2. 「🤖 Gemini API キー」セクションが表示されていることを確認
+3. テスト用の Gemini API キー（Step 5 で取得したもの）を入力してみる
+4. 「保存」ボタンで保存できれば OK ✅
+
+#### 確認2: Web Push ボタン動作確認
+1. 同じ設定ページ内で「🔔 通知」セクションを確認
+2. 「🔔 通知をオンにする」ボタンが表示・クリック可能であることを確認
+3. クリックして通知許可を与えると、購読状態が保存される ✅
+
+### トラブルシューティング
+
+**Q. SQL 実行時に「テーブルまたはビューが存在しません」エラーが出る**
+→ 初期マイグレーション（`20260502000000_initial.sql`）が未実行です。
+   SQL Editor で実行順に他の migration も確認してください。
+
+**Q. 権限エラー（Permission denied）が出る**
+→ Supabase の `is_admin()` 関数が定義されているか確認してください。
+   初期マイグレーションに GRANT 文が含まれています。
+
+---
+
 ## 完了後のアクション
 
-すべて完了したら、結パパさんから「セットアップ完了」と教えてください。
-その後、私が **Next.js 14 雛形** を `app/` 配下に作成し、Step 4 でメモした値を `.env.local` に入れて疎通テストします。
+Step 6 チェックリストとこの Step 7 が完了したら、すべてのセットアップが終了です！
+コンサル生への展開（Phase 2）に進めます。
 
 ---
 

@@ -5,7 +5,7 @@ import { requireAuth } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 
 export async function updateGeminiApiKey(formData: FormData) {
-  const profile = await requireAuth();
+  await requireAuth();
   const raw = (formData.get("apiKey") as string) ?? "";
   const trimmed = raw.trim();
 
@@ -17,10 +17,9 @@ export async function updateGeminiApiKey(formData: FormData) {
   }
 
   const supabase = await createClient();
-  const { error } = await supabase
-    .from("profiles")
-    .update({ gemini_api_key: trimmed || null })
-    .eq("id", profile.id);
+  const { error } = trimmed
+    ? await supabase.rpc("set_user_gemini_key", { p_key: trimmed })
+    : await supabase.rpc("delete_user_gemini_key");
 
   if (error) {
     console.error("[settings/updateApiKey] error:", error);
@@ -32,13 +31,10 @@ export async function updateGeminiApiKey(formData: FormData) {
 }
 
 export async function deleteGeminiApiKey() {
-  const profile = await requireAuth();
+  await requireAuth();
   const supabase = await createClient();
 
-  const { error } = await supabase
-    .from("profiles")
-    .update({ gemini_api_key: null })
-    .eq("id", profile.id);
+  const { error } = await supabase.rpc("delete_user_gemini_key");
 
   if (error) {
     console.error("[settings/deleteApiKey] error:", error);

@@ -7,10 +7,10 @@ import { getTodayDate, getLastNDates } from "@/lib/date";
 import { feedActiveCat, unfeedActiveCat } from "@/app/_actions/cat";
 import { adjustCurrency } from "@/app/_actions/currency";
 
-const FISH_PER_TASK = 2;
-const FISH_PERFECT_BONUS = 5;
-const RARE_FISH_CHANCE = 0.15;     // 15% でレアボーナス発生
-const RARE_FISH_BONUS = 5;
+const COIN_PER_TASK = 2;
+const COIN_PERFECT_BONUS = 5;
+const RARE_COIN_CHANCE = 0.15;     // 15% でレアボーナス発生
+const RARE_COIN_BONUS = 5;
 const RARE_PAW_CHANCE = 0.30;      // レアボーナス時、さらに 30% で paw も出る
 const RARE_PAW_BONUS = 1;
 const STREAK_DAYS = 7;
@@ -20,7 +20,7 @@ const MAX_TITLE_LENGTH = 200;
 
 export type ToggleResult = {
   perfect: boolean;
-  rareFish: number;
+  rareCoin: number;
   rarePaw: number;
   streakPaw: number;
 };
@@ -134,10 +134,10 @@ export async function toggleTaskCompletion(
     // 餌を取り消す（猫がいれば、Lv DOWN なら paw も自動取消）
     await unfeedActiveCat();
 
-    // おさかなを取り消す
+    // コインを取り消す
     await adjustCurrency({
-      kind: "fish",
-      amount: -FISH_PER_TASK,
+      kind: "coin",
+      amount: -COIN_PER_TASK,
       reason: "task_uncomplete",
       relatedId: taskId,
     });
@@ -145,8 +145,8 @@ export async function toggleTaskCompletion(
     // 削除前が100%達成だったら、パーフェクトボーナスも取り消す
     if (wasPerfect) {
       await adjustCurrency({
-        kind: "fish",
-        amount: -FISH_PERFECT_BONUS,
+        kind: "coin",
+        amount: -COIN_PERFECT_BONUS,
         reason: "task_uncomplete",
         note: `perfect_bonus_revoke ${today}`,
       });
@@ -154,7 +154,7 @@ export async function toggleTaskCompletion(
 
     revalidatePath("/tasks");
     revalidatePath("/");
-    return { perfect: false, rareFish: 0, rarePaw: 0, streakPaw: 0 };
+    return { perfect: false, rareCoin: 0, rarePaw: 0, streakPaw: 0 };
   } else {
     // 未完了 → 完了
     const { error } = await supabase.from("task_completions").insert({
@@ -168,10 +168,10 @@ export async function toggleTaskCompletion(
     }
     // 餌を与える（猫がいれば）
     await feedActiveCat();
-    // おさかな付与
+    // コイン付与
     await adjustCurrency({
-      kind: "fish",
-      amount: FISH_PER_TASK,
+      kind: "coin",
+      amount: COIN_PER_TASK,
       reason: "task_complete",
       relatedId: taskId,
     });
@@ -199,8 +199,8 @@ export async function toggleTaskCompletion(
     ) {
       // 全タスク完了：パーフェクトボーナス
       await adjustCurrency({
-        kind: "fish",
-        amount: FISH_PERFECT_BONUS,
+        kind: "coin",
+        amount: COIN_PERFECT_BONUS,
         reason: "daily_perfect_bonus",
         note: today,
       });
@@ -208,13 +208,13 @@ export async function toggleTaskCompletion(
     }
 
     // レア報酬枠（タスク完了のたびに抽選）
-    let rareFish = 0;
+    let rareCoin = 0;
     let rarePaw = 0;
-    if (Math.random() < RARE_FISH_CHANCE) {
-      rareFish = RARE_FISH_BONUS;
+    if (Math.random() < RARE_COIN_CHANCE) {
+      rareCoin = RARE_COIN_BONUS;
       await adjustCurrency({
-        kind: "fish",
-        amount: RARE_FISH_BONUS,
+        kind: "coin",
+        amount: RARE_COIN_BONUS,
         reason: "task_complete",
         relatedId: taskId,
         note: "rare_bonus",
@@ -263,6 +263,6 @@ export async function toggleTaskCompletion(
 
     revalidatePath("/tasks");
     revalidatePath("/");
-    return { perfect, rareFish, rarePaw, streakPaw };
+    return { perfect, rareCoin, rarePaw, streakPaw };
   }
 }

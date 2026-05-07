@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { USER_ROLES, ROLE_LABELS, type UserRole } from "@/lib/types";
+import { BroadcastNotificationForm } from "./_components/BroadcastNotificationForm";
 
 export const dynamic = "force-dynamic";
 
@@ -52,6 +53,14 @@ export default async function AdminDashboard() {
           Google ログインしたユーザーは自動的に「一般」ロールで登録されます。
           管理者にしたい場合は「ユーザー」タブから該当ユーザーのロールを変更してください。
         </p>
+      </div>
+
+      <div className="bg-white rounded-lg shadow p-6">
+        <h3 className="font-bold text-lg mb-4">📢 ブロードキャスト通知</h3>
+        <p className="text-sm text-gray-600 mb-4">
+          全ユーザーへプッシュ通知を送信できます。重要なお知らせやキャンペーン情報をお届けします。
+        </p>
+        <BroadcastNotificationForm />
       </div>
     </div>
   );

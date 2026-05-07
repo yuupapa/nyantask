@@ -109,17 +109,34 @@ Phase 1.2〜1.6 コード実装完了（2026-05-03）：
 
 ## ブロッカー・要相談
 
-- Supabase migration 2本（gemini_apikey + push_subscriptions）を手動で適用する必要あり
+（現時点でブロッカーなし）
+
+## Gemini API キーの管理に関する注意事項
+
+現在のキーは **Supabase DB に平文保存（MVP仕様）**。以下のタイミングで対応が必要：
+
+| タイミング | 対応内容 |
+|-----------|---------|
+| **Phase 2 開始前**（コンサル生10名に展開する前）| Supabase Vault へ移行。平文保存では管理者がキーを参照できる状態のため |
+| **キーの漏洩疑いが生じたとき** | [Google AI Studio](https://aistudio.google.com/apikey) で該当キーを即時削除・再発行。設定画面から新しいキーを再登録 |
+| **定期メンテナンス時**（推奨：3〜6ヶ月ごと） | Google AI Studio で利用状況を確認。見覚えのないリクエストがあればキーをローテーション |
+| **コンサル生のアカウント退会時** | 当該ユーザーのキーは RLS で自動削除されるが、念のため Google AI Studio 側でも使用状況を確認 |
 
 ## 次のアクション
 
 優先度順：
 
-1. **【結パパ手動】Supabase migration 適用**（`20260503040000_gemini_apikey.sql` と `20260503050000_push_subscriptions.sql` をSQL Editorで実行）
-2. **管理画面ブロードキャスト通知 UI**（`/admin` からプッシュ通知を全ユーザー送信）
-3. **Edge Functions cron**（Supabase Edge Function で1時間ごとの decay 実行）— MVP では lazy eval で代替中のため任意
-4. **動作確認・テスト運用**（Phase 2 準備：コンサル生10名への展開）
+1. ✅ **【完了】Supabase migration 適用**（2026-05-07 実施済み）
+2. ✅ **【完了】管理画面ブロードキャスト通知 UI**（2026-05-07 実装済み）
+3. **動作確認・テスト運用**（Phase 2 準備：コンサル生10名への展開）
+4. **Edge Functions cron**（Supabase Edge Function で1時間ごとの decay 実行）— MVP では lazy eval で代替中のため任意
+5. ✅ **【完了】Gemini API キーの Supabase Vault 移行**（2026-05-07 実施済み）
+6. **【Phase 2 実装】ショップ機能 + コイン移行**（詳細は `docs/PLAN.md` 参照）
+   - 🐟おさかな → 🪙コイン（DB・コード・UI 全体リネーム）
+   - 餌3種（梅/竹/松）で満腹度回復
+   - インテリア（見た目のみ）
+   - おもちゃ（機嫌UP等の効果あり）
 
 ---
 
-更新日：2026-05-06（Phase 1.6 コード完了確認・全体状態を再整理）
+更新日：2026-05-07（Migration 適用完了・ブロードキャスト通知 UI 実装完了・Gemini キー管理注意事項追記）

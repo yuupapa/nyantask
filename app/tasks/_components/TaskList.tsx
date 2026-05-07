@@ -59,7 +59,7 @@ function TaskItem({
       try {
         const result = await toggleTaskCompletion(task.id, isCompleted);
         // 完了時のみ報酬通知（uncomplete はスキップ）
-        if (!isCompleted && (result.perfect || result.rareFish > 0 || result.streakPaw > 0)) {
+        if (!isCompleted && (result.perfect || result.rareCoin > 0 || result.streakPaw > 0)) {
           setReward(result);
         }
       } catch (err) {
@@ -119,8 +119,8 @@ function TaskItem({
       {/* 報酬ポップアップ */}
       {reward && (
         <div className="absolute -top-8 left-1/2 -translate-x-1/2 flex gap-2 bg-white border border-yellow-300 shadow-md rounded-full px-3 py-1 text-xs font-semibold text-gray-800 animate-bounce z-10 whitespace-nowrap">
-          {reward.perfect && <span>🎉 パーフェクト +{5}🐟</span>}
-          {reward.rareFish > 0 && <span>✨ レア +{reward.rareFish}🐟</span>}
+          {reward.perfect && <span>🎉 パーフェクト +{5}🪙</span>}
+          {reward.rareCoin > 0 && <span>✨ レア +{reward.rareCoin}🪙</span>}
           {reward.rarePaw > 0 && <span>+{reward.rarePaw}🐾</span>}
           {reward.streakPaw > 0 && <span>🔥 7日連続 +{reward.streakPaw}🐾</span>}
         </div>

@@ -26,13 +26,21 @@ const GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1beta/models
 export async function generateCatMessage(): Promise<string> {
   const profile = await requireAuth();
 
-  if (!profile.gemini_api_key) {
+  const supabase = await createClient();
+
+  const { data: geminiKey, error: keyError } = await supabase.rpc(
+    "get_user_gemini_key"
+  );
+  if (keyError) {
+    console.error("[gemini] get_user_gemini_key error:", keyError);
+    throw new Error("APIキーの取得に失敗しました");
+  }
+  if (!geminiKey) {
     throw new Error(
       "Gemini APIキーが設定されていません。設定画面から登録してください。"
     );
   }
 
-  const supabase = await createClient();
   const { data: cat, error: catError } = await supabase
     .from("cats")
     .select(
@@ -52,7 +60,7 @@ export async function generateCatMessage(): Promise<string> {
   );
 
   const response = await fetch(
-    `${GEMINI_API_BASE}/${GEMINI_MODEL}:generateContent?key=${profile.gemini_api_key}`,
+    `${GEMINI_API_BASE}/${GEMINI_MODEL}:generateContent?key=${geminiKey}`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
