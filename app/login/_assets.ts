@@ -18,7 +18,7 @@ export type LoginAsset = {
 // 装飾ステッカー（背景レイヤー）
 export const DECOR_ASSETS: LoginAsset[] = [
   { idx: 35, key: "speech_bubble", src: "/login-svg/img-35.png", x: 131.95, y: 74.45, w: 441.59, h: 418.35, z: 1 },
-  { idx: 32, key: "pink_paw", src: "/login-svg/img-32.png", x: 14.24, y: 89.44, w: 118.46, h: 104.96, z: 2 },
+  { idx: 32, key: "pink_paw", src: "/login-svg/img-32.png", x: 80, y: 522, w: 118.46, h: 104.96, z: 2 },
   { idx: 33, key: "star_yellow", src: "/login-svg/img-33.png", x: 146.95, y: 59.45, w: 59.23, h: 60.73, z: 5 },
   { idx: 34, key: "star_mint", src: "/login-svg/img-34.png", x: 58.48, y: 223.64, w: 44.98, h: 45.73, z: 5 },
   { idx: 36, key: "yarn", src: "/login-svg/img-36.png", x: 440.84, y: 29.46, w: 88.47, h: 60.73, z: 5 },
