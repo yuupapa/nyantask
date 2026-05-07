@@ -50,8 +50,8 @@ export default async function Home() {
         <header className="bg-white/80 backdrop-blur border-b border-gray-100 sticky top-0 z-10">
           <div className="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
             <h1 className="text-xl font-extrabold tracking-tight">
-              <span className="text-teal-500">Neko</span>
-              <span className="text-orange-400">Task</span>
+              <span style={{ color: "#FF8FA8" }}>にゃん</span>
+              <span style={{ color: "#5DAEE8" }}>タスク</span>
             </h1>
             <CurrencyDisplay coin={profile.coin} paw={profile.paw} />
           </div>
