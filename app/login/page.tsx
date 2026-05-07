@@ -59,18 +59,20 @@ export default function LoginPage() {
           </div>
         ))}
 
-        {/* ─────────────────────────────────
-            吹き出し内のキャッチコピー
-            （吹き出し: x:131.95 y:74.45 w:441.59 h:418.35）
-        ───────────────────────────────── */}
+        {/* 吹き出し内のキャッチコピー（円形部分に flex 中央配置） */}
         <div
           style={{
             position: "absolute",
-            left: pct(131.95 + 30, "w"),
-            top: pct(74.45 + 90, "h"),
-            width: pct(441.59 - 60, "w"),
+            left: pct(131.95, "w"),
+            top: pct(74.45, "h"),
+            width: pct(441.59, "w"),
+            height: pct(360, "h"),
             zIndex: 10,
-            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            paddingBottom: "3%",
           }}
         >
           <p
