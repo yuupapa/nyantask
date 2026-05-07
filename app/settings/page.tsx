@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 export default async function SettingsPage() {
   const profile = await requireAuth();
-  const hasKey = !!profile.gemini_api_key;
+  const hasKey = profile.has_gemini_key;
   const vapidPublicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY ?? "";
 
   return (

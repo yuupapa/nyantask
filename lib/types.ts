@@ -21,9 +21,9 @@ export type Profile = {
   email: string;
   display_name: string | null;
   role: UserRole;
-  fish: number;
+  coin: number;
   paw: number;
-  gemini_api_key: string | null;
+  has_gemini_key: boolean;
   created_at: string;
   last_seen_at: string;
 };
@@ -32,16 +32,16 @@ export type Profile = {
 // 通貨
 // ============================================================
 
-export const CURRENCY_KINDS = ["fish", "paw"] as const;
+export const CURRENCY_KINDS = ["coin", "paw"] as const;
 export type CurrencyKind = (typeof CURRENCY_KINDS)[number];
 
 export const CURRENCY_LABELS: Record<CurrencyKind, string> = {
-  fish: "おさかな",
+  coin: "コイン",
   paw: "にくきゅう",
 };
 
 export const CURRENCY_EMOJI: Record<CurrencyKind, string> = {
-  fish: "🐟",
+  coin: "🪙",
   paw: "🐾",
 };
 

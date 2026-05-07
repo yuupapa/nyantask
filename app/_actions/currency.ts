@@ -6,7 +6,7 @@ import type { CurrencyKind, CurrencyReason } from "@/lib/types";
 
 /**
  * 通貨を増減する。
- *  - profiles.fish / paw を更新
+ *  - profiles.coin / paw を更新
  *  - currency_transactions に履歴を残す
  *  - 残高が負になる操作は CHECK 制約で弾かれる（その場合エラーをログ出力するが投げない）
  *
@@ -27,7 +27,7 @@ export async function adjustCurrency(input: {
   // 現残高を取得
   const { data: current, error: fetchError } = await supabase
     .from("profiles")
-    .select("fish, paw")
+    .select("coin, paw")
     .eq("id", profile.id)
     .single();
 

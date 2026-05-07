@@ -61,7 +61,7 @@ export default async function Home() {
           <span className="text-xs text-gray-600 bg-white/70 px-3 py-1 rounded-full">
             {SEASON_EMOJI[season]} {SEASON_LABELS[season]}のシーズン
           </span>
-          <CurrencyDisplay fish={profile.fish} paw={profile.paw} />
+          <CurrencyDisplay coin={profile.coin} paw={profile.paw} />
         </div>
 
         {catError && (
@@ -79,7 +79,7 @@ export default async function Home() {
           <CatCard
             cat={cat}
             pawBalance={profile.paw}
-            hasApiKey={!!profile.gemini_api_key}
+            hasApiKey={profile.has_gemini_key}
           />
         )}
 

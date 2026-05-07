@@ -27,7 +27,7 @@ export async function getCurrentProfile(): Promise<Profile | null> {
   const { data: profile, error } = await supabase
     .from("profiles")
     .select(
-      "id, email, display_name, role, fish, paw, gemini_api_key, created_at, last_seen_at"
+      "id, email, display_name, role, coin, paw, gemini_vault_id, created_at, last_seen_at"
     )
     .eq("id", user.id)
     .single();
@@ -37,7 +37,10 @@ export async function getCurrentProfile(): Promise<Profile | null> {
     return null;
   }
 
-  return profile as Profile;
+  return {
+    ...profile,
+    has_gemini_key: profile.gemini_vault_id !== null,
+  } as Profile;
 }
 
 /**
