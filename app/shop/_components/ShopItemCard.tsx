@@ -70,7 +70,7 @@ export function ShopItemCard({
       <button
         onClick={handlePurchase}
         disabled={isPending || !canAfford}
-        className={`mt-1 w-full py-2 rounded-lg text-sm font-semibold transition ${
+        className={`mt-1 w-full py-2 rounded-xl text-sm font-semibold transition ${
           canAfford
             ? "bg-nyan-pink-deep text-white hover:opacity-80"
             : "bg-gray-200 text-gray-400 cursor-not-allowed"

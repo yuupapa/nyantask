@@ -87,10 +87,10 @@ function TaskItem({
 
   return (
     <li
-      className={`relative flex items-center gap-3 p-3 rounded-lg border transition ${
+      className={`relative flex items-center gap-3 p-3 rounded-xl border transition ${
         isCompleted
           ? "bg-green-50 border-green-200"
-          : "bg-white border-gray-200 hover:border-nyan-pink-deep"
+          : "bg-white border-gray-100 shadow-sm hover:border-nyan-pink/50"
       } ${isPending ? "opacity-60" : ""}`}
     >
       <input
