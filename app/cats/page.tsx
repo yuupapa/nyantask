@@ -4,6 +4,7 @@ import type { Cat } from "@/lib/types";
 import Link from "next/link";
 import { CatThumb } from "./_components/CatThumb";
 import { getCurrentSeason, SEASON_BG, SEASON_EMOJI, SEASON_LABELS } from "@/lib/season";
+import { AuthShell } from "@/app/_components/AuthShell";
 
 export const dynamic = "force-dynamic";
 
@@ -28,27 +29,22 @@ export default async function CatsPage() {
   const uniquePatterns = new Set(cats.map((c) => c.pattern));
 
   return (
+    <AuthShell>
     <main className={`min-h-screen ${SEASON_BG[season]}`}>
-      <header className="bg-white/70 backdrop-blur border-b border-gray-200 sticky top-0 z-10">
-        <div className="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+      <header className="bg-white/80 backdrop-blur border-b border-gray-100 sticky top-0 z-10">
+        <div className="max-w-md mx-auto px-4 py-3">
           <h1 className="text-xl font-bold text-nyan-pink-deep">
             📖 ねこ図鑑
             <span className="ml-2 text-xs font-normal text-gray-500">
               {SEASON_EMOJI[season]} {SEASON_LABELS[season]}
             </span>
           </h1>
-          <Link
-            href="/"
-            className="text-sm text-gray-600 hover:text-nyan-pink-deep transition"
-          >
-            ← ホームへ
-          </Link>
         </div>
       </header>
 
-      <div className="max-w-3xl mx-auto p-4 space-y-6">
+      <div className="max-w-md mx-auto p-4 space-y-6">
         {/* 収集サマリー */}
-        <div className="bg-white rounded-lg shadow p-4">
+        <div className="bg-white rounded-2xl shadow-sm p-4">
           <h2 className="font-bold mb-3">収集状況</h2>
           <div className="grid grid-cols-3 gap-3">
             <Stat label="出会った数" value={cats.length} />
@@ -64,7 +60,7 @@ export default async function CatsPage() {
             <CatThumb cat={activeCat} />
           </section>
         ) : (
-          <section className="bg-white rounded-lg shadow p-6 text-center">
+          <section className="bg-white rounded-2xl shadow-sm p-6 text-center">
             <p className="text-gray-600 text-sm">育てている猫がいません</p>
             <Link
               href="/"
@@ -98,6 +94,7 @@ export default async function CatsPage() {
         )}
       </div>
     </main>
+    </AuthShell>
   );
 }
 

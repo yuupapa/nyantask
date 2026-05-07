@@ -44,12 +44,12 @@ export function AddTaskForm({
         maxLength={200}
         placeholder={placeholder}
         disabled={isPending}
-        className="flex-1 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-nyan-pink-deep disabled:opacity-50"
+        className="flex-1 px-3 py-2 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-nyan-pink-deep disabled:opacity-50 text-sm"
       />
       <button
         type="submit"
         disabled={isPending}
-        className="px-4 py-2 bg-nyan-pink-deep text-white rounded hover:opacity-80 transition disabled:opacity-50 whitespace-nowrap"
+        className="px-4 py-2 bg-nyan-pink-deep text-white rounded-xl hover:opacity-80 transition disabled:opacity-50 whitespace-nowrap text-sm font-semibold"
       >
         {buttonLabel}
       </button>

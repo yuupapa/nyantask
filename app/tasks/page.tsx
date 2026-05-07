@@ -2,10 +2,10 @@ import { requireAuth } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { getTodayDate } from "@/lib/date";
 import type { Task } from "@/lib/types";
-import Link from "next/link";
 import { addRoutineTask, addDailyTask } from "./_actions";
 import { TaskList } from "./_components/TaskList";
 import { AddTaskForm } from "./_components/AddTaskForm";
+import { AuthShell } from "@/app/_components/AuthShell";
 
 export const dynamic = "force-dynamic";
 
@@ -53,22 +53,17 @@ export default async function TasksPage() {
   const dailyTasks = todayTasks.filter((t) => t.type === "daily");
 
   return (
+    <AuthShell>
     <main className="min-h-screen bg-nyan-cream">
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
-        <div className="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+      <header className="bg-white/80 backdrop-blur border-b border-gray-100 sticky top-0 z-10">
+        <div className="max-w-md mx-auto px-4 py-3">
           <h1 className="text-xl font-bold text-nyan-pink-deep">📝 やることリスト</h1>
-          <Link
-            href="/"
-            className="text-sm text-gray-600 hover:text-nyan-pink-deep transition"
-          >
-            ← ホームへ
-          </Link>
         </div>
       </header>
 
-      <div className="max-w-3xl mx-auto p-4 space-y-6">
+      <div className="max-w-md mx-auto p-4 space-y-6">
         {/* 達成率カード */}
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-2xl shadow-sm p-6">
           <div className="flex items-center justify-between mb-3">
             <div>
               <div className="text-sm text-gray-600">今日の達成状況</div>
@@ -105,7 +100,7 @@ export default async function TasksPage() {
         </div>
 
         {/* ルーチンタスク */}
-        <section className="bg-white rounded-lg shadow p-6 space-y-3">
+        <section className="bg-white rounded-2xl shadow-sm p-6 space-y-3">
           <div>
             <h2 className="font-bold flex items-center gap-2">
               🔁 ルーチンタスク
@@ -124,7 +119,7 @@ export default async function TasksPage() {
         </section>
 
         {/* デイリータスク */}
-        <section className="bg-white rounded-lg shadow p-6 space-y-3">
+        <section className="bg-white rounded-2xl shadow-sm p-6 space-y-3">
           <div>
             <h2 className="font-bold flex items-center gap-2">
               📅 今日だけのタスク
@@ -143,5 +138,6 @@ export default async function TasksPage() {
         </section>
       </div>
     </main>
+    </AuthShell>
   );
 }
