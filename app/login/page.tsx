@@ -66,13 +66,12 @@ export default function LoginPage() {
             left: pct(131.95, "w"),
             top: pct(74.45, "h"),
             width: pct(441.59, "w"),
-            height: pct(360, "h"),
+            height: pct(380, "h"),
             zIndex: 10,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            paddingBottom: "3%",
           }}
         >
           <p
@@ -90,7 +89,7 @@ export default function LoginPage() {
             className="font-extrabold leading-tight mt-1"
             style={{
               color: "#fff",
-              fontSize: "clamp(36px, 10vw, 52px)",
+              fontSize: "clamp(42px, 11.5vw, 58px)",
               textShadow: "0 3px 0 rgba(0,0,0,0.15), 0 6px 10px rgba(0,0,0,0.1)",
               letterSpacing: "0.02em",
             }}
