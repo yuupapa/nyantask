@@ -12,7 +12,7 @@
 
 import { useState, useEffect } from "react";
 
-const FRAME_NATURAL_W = 418;
+const FRAME_NATURAL_W = 520; // 体アライメント拡張後の出力幅（元418px → 520px）
 const FRAME_NATURAL_H = 470;
 const FRAME_COUNT = 4;
 /** 1 フレームの表示時間 (ms)。合計 3 秒 / 4 フレーム = 750ms */

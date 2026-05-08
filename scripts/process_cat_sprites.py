@@ -4,12 +4,13 @@
   - 4x2グリッドを8コマに分割
   - 上段4コマ → idle フレームを1枚ずつ個別保存（{name}-idle-0.png 〜 -3.png）
     ※ 体の中心を全フレームで揃えて横ブレを除去
-    ※ 連結成分フィルタで隣フレームからのはみ出し破片を除去
+    ※ 出力幅を FIXED_FRAME_W=520px に拡張してシフト時の尻尾クリップを防止
+    ※ 本体から遠い孤立破片のみ除去（尻尾は保持）
   - 下段4コマ → 表情フレーム（個別 PNG: happy / sparkle / sad / normal）
 """
 
 from PIL import Image
-from scipy.ndimage import label as ndlabel
+from scipy.ndimage import label as ndlabel, binary_dilation
 import numpy as np
 import os
 
@@ -27,6 +28,10 @@ CATS = {
 # 下段コマ順：左から happy / sparkle / sad / normal
 EXPRESSIONS = ["happy", "sparkle", "sad", "normal"]
 
+# 体アライメント後の出力幅（元の418pxより広くして尻尾クリップを防止）
+# 体中心が FIXED_FRAME_W//2 = 260px に揃えられる
+FIXED_FRAME_W = 520
+
 
 def remove_white_bg(img: Image.Image, threshold: int = 240) -> Image.Image:
     """白〜明るいグレーを透明化する"""
@@ -38,32 +43,38 @@ def remove_white_bg(img: Image.Image, threshold: int = 240) -> Image.Image:
     return Image.fromarray(data)
 
 
-def keep_largest_component(img: Image.Image) -> Image.Image:
+def keep_body_and_nearby(img: Image.Image, proximity_px: int = 20) -> Image.Image:
     """
-    アルファチャンネルで連結成分分析を行い、最大成分（猫本体）だけを残す。
-    隣フレームの尻尾や破片など、切り取り範囲外から混入した孤立ピクセルを除去する。
+    猫本体（最大連結成分）とその proximity_px ピクセル以内にある領域を保持し、
+    それ以外の孤立破片（隣フレームの尻尾など）を透明化する。
+
+    従来の「最大成分のみ保持」と異なり、
+    本体に近い尻尾の細い接続部も正しく保持できる。
     """
     data = np.array(img.convert("RGBA"))
-    alpha = data[:, :, 3] > 20  # ほぼ不透明な領域をマスク化
+    alpha = data[:, :, 3] > 20
 
-    labeled, n_components = ndlabel(alpha)
-    if n_components <= 1:
-        return img  # 成分が1つ以下ならそのまま返す
+    labeled, n = ndlabel(alpha)
+    if n <= 1:
+        return img
 
-    # 各成分のピクセル数を集計（背景ラベル0を除く）
     counts = np.bincount(labeled.ravel())
     counts[0] = 0
-    largest_label = int(counts.argmax())
+    main_mask = labeled == int(counts.argmax())
 
-    # 最大成分以外のアルファを0にする
+    # 最大成分を proximity_px 膨張させて「保持ゾーン」を作成
+    struct = np.ones((proximity_px * 2 + 1, proximity_px * 2 + 1), dtype=bool)
+    near_main = binary_dilation(main_mask, structure=struct)
+
+    # 元のアルファで保持ゾーン内にあるピクセルを残す
+    keep_mask = alpha & near_main
+    removed_px = int(alpha.sum() - keep_mask.sum())
+    if removed_px > 0:
+        print(f"    fragment filter: removed {removed_px}px "
+              f"(>{proximity_px}px from main body)")
+
     new_data = data.copy()
-    new_data[labeled != largest_label, 3] = 0
-
-    removed = n_components - 1
-    if removed > 0:
-        print(f"    component filter: {n_components} components -> kept largest "
-              f"({counts[largest_label]} px), removed {removed} fragment(s)")
-
+    new_data[~keep_mask, 3] = 0
     return Image.fromarray(new_data)
 
 
@@ -78,29 +89,37 @@ def get_body_center_x(img: Image.Image, top_fraction: float = 0.60) -> int:
     alpha = data[:top_h, :, 3]
     cols = np.where(alpha > 20)[1]
     if len(cols) == 0:
-        return img.width // 2  # フォールバック
+        return img.width // 2
     return int((int(cols.min()) + int(cols.max())) / 2)
 
 
 def align_frames(frames: list) -> list:
     """
-    全フレームの体の中心X座標を揃えて横ブレを除去する。
-    各フレームを左右にシフトし、体がほぼ同じ位置に見えるよう調整。
+    全フレームの体の中心X座標を FIXED_FRAME_W//2 に揃えて横ブレを除去する。
+    出力幅を FIXED_FRAME_W に拡張することで、シフト時の尻尾クリップを防止する。
     """
     centers = [get_body_center_x(f) for f in frames]
-    target = int(sum(centers) / len(centers))  # 全フレームの平均を目標中心に
+    target = int(sum(centers) / len(centers))
     print(f"    body centers: {centers}  -> target: {target}")
+
+    W, H = frames[0].size
+    body_target_x = FIXED_FRAME_W // 2  # 260px
 
     aligned = []
     for frame, cx in zip(frames, centers):
-        offset = target - cx
-        if offset == 0:
-            aligned.append(frame)
-            continue
-        shifted = Image.new("RGBA", frame.size, (0, 0, 0, 0))
-        # offset が正 = 右にシフト、負 = 左にシフト
-        shifted.paste(frame, (offset, 0), frame)
-        aligned.append(shifted)
+        paste_x = body_target_x - cx
+        canvas = Image.new("RGBA", (FIXED_FRAME_W, H), (0, 0, 0, 0))
+        canvas.paste(frame, (paste_x, 0), frame)
+
+        # クリップが発生していないかチェック
+        if paste_x < 0:
+            print(f"    WARN: still clips {-paste_x}px on left (cx={cx})")
+        if paste_x + W > FIXED_FRAME_W:
+            print(f"    WARN: still clips {paste_x+W-FIXED_FRAME_W}px on right (cx={cx})")
+
+        aligned.append(canvas)
+
+    print(f"    frame size: {W}x{H} -> {FIXED_FRAME_W}x{H}")
     return aligned
 
 
@@ -119,17 +138,14 @@ def process(name: str, filename: str, cols: int = 4, rows: int = 2):
             cell = src.crop((col * cw, row * ch, (col + 1) * cw, (row + 1) * ch))
             cells.append(remove_white_bg(cell))
 
-    # ── idle: 連結成分フィルタ → 体中心揃え → 1フレームずつ個別保存
+    # ── idle: 破片除去 → 体中心揃え（拡張キャンバス）→ 個別保存
     print("  [idle frames]")
-    # 1. 孤立した破片（隣コマの尻尾など）を除去
-    cells_filtered = [keep_largest_component(c) for c in cells[:4]]
-    # 2. 体の中心を揃えて横ブレ除去
-    idle_aligned = align_frames(cells_filtered)
-    # 3. 個別PNG保存
+    cells_clean = [keep_body_and_nearby(c, proximity_px=20) for c in cells[:4]]
+    idle_aligned = align_frames(cells_clean)
     for i, cell in enumerate(idle_aligned):
         out_path = os.path.join(OUT_DIR, f"{name}-idle-{i}.png")
         cell.save(out_path, optimize=True)
-        print(f"  OK {name}-idle-{i}.png  ({cw}x{ch}px)")
+        print(f"  OK {name}-idle-{i}.png  ({FIXED_FRAME_W}x{ch}px)")
 
     # ── 表情フレーム（下段4コマ個別保存）
     print("  [expression frames]")
@@ -144,5 +160,6 @@ if __name__ == "__main__":
     for name, fn in CATS.items():
         process(name, fn)
 
-    print("\nDone!")
+    print(f"\nDone! FIXED_FRAME_W={FIXED_FRAME_W}px")
     print(f"   -> {OUT_DIR}")
+    print(f"   -> CatSprite.tsx の FRAME_NATURAL_W を {FIXED_FRAME_W} に更新してください")
