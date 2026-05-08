@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import type { Cat, ShopItem, UserItem } from "@/lib/types";
 import { PetCatButton } from "@/app/_components/PetCatButton";
 import { CatTalkButton } from "@/app/_components/CatTalkButton";
 import { CatNameEditor } from "@/app/_components/CatNameEditor";
+import { CatSprite, type SpriteState } from "@/app/_components/CatSprite";
 import {
   getStage,
   getDaysSinceBorn,
@@ -14,6 +14,7 @@ import {
   STATUS_LABELS,
   STATUS_EMOJI,
   xpProgress,
+  getAppearance,
 } from "@/lib/cat";
 import { UseItemButton } from "./UseItemButton";
 
@@ -38,7 +39,13 @@ export function CatRoomClient({ cat, userItems, pawBalance, hasApiKey }: Props) 
     (i) => i.shop_item.category === "furniture"
   );
 
-  const catImgSrc = `/cats/cat-${String(cat.visual_id ?? 1).padStart(3, "0")}.png`;
+  // ステータスから表情スプライトを決定
+  const appearance = getAppearance({ friendshipLevel: xp.level, status });
+  const spriteState: SpriteState =
+    appearance === "sparkle" ? "sparkle"
+    : status === "happy"    ? "happy"
+    : status === "sad" || status === "sick" ? "sad"
+    : "normal";
 
   return (
     <div className="space-y-4 pt-3">
@@ -96,28 +103,17 @@ export function CatRoomClient({ cat, userItems, pawBalance, hasApiKey }: Props) 
           </div>
         )}
 
-        {/* 猫（アニメ付き） */}
-        <motion.div
+        {/* 猫（スプライトアニメ） */}
+        <div
           className="absolute"
-          style={{
-            bottom: 36,
-            left: "50%",
-            translateX: "-50%",
-            width: 160,
-            marginLeft: -80,
-          }}
-          animate={{ y: [0, -8, 0] }}
-          transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+          style={{ bottom: 30, left: "50%", transform: "translateX(-50%)" }}
         >
-          <Image
-            src={catImgSrc}
-            alt={cat.name ?? "ねこ"}
-            width={160}
-            height={160}
-            style={{ width: "100%", height: "auto", objectFit: "contain" }}
-            priority
+          <CatSprite
+            visualId={cat.visual_id ?? 1}
+            state="idle"
+            height={220}
           />
-        </motion.div>
+        </div>
 
         {/* ステータスバッジ */}
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2">
