@@ -99,8 +99,9 @@ body {
 .ribbon::after { right: -10px; }
 
 /* 猫スプライトシートアニメーション
-   --sprite-strip-w: スプライトストリップの全幅 (px) */
-@keyframes catSpriteIdle {
-  from { background-position-x: 0; }
-  to   { background-position-x: calc(var(--sprite-strip-w) * -1); }
+   内側div(width=stripW)をtranslateX(-100%)でスライド
+   overflow:hiddenの外側divが1フレーム分だけ表示してクリップ */
+@keyframes catSpriteIdleSlide {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
 }
