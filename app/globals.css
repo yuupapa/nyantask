@@ -101,5 +101,6 @@ body {
 /* 猫スプライトシートアニメーション
    --sprite-strip-w: スプライトストリップの全幅 (px) */
 @keyframes catSpriteIdle {
-  to { background-position-x: calc(var(--sprite-strip-w) * -1); }
+  from { background-position-x: 0; }
+  to   { background-position-x: calc(var(--sprite-strip-w) * -1); }
 }

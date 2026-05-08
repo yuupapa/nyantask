@@ -18,7 +18,8 @@
 const FRAME_NATURAL_W = 418;
 const FRAME_NATURAL_H = 470;
 const FRAME_COUNT = 4;
-const FPS = 6; // フレームレート（低めにするとゆったりした動き）
+// 1サイクル（4フレーム）にかかる秒数。大きくするほどゆっくり。
+const CYCLE_DURATION = "3s";
 
 // 利用可能なスプライト名
 const SPRITE_NAMES = ["black", "tabby", "calico"] as const;
@@ -49,9 +50,11 @@ export function CatSprite({
   const scale = height / FRAME_NATURAL_H;
   const displayW = Math.round(FRAME_NATURAL_W * scale);
   const stripW = displayW * FRAME_COUNT;
-  const duration = (FRAME_COUNT / FPS).toFixed(2);
 
   if (state === "idle") {
+    // フレーム間で尻尾が隣コマにはみ出す場合があるため
+    // clip-path で左右 12px ずつカットして隠す
+    const clipPx = 12;
     return (
       <div
         className={className}
@@ -63,9 +66,10 @@ export function CatSprite({
             backgroundSize: `${stripW}px ${height}px`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "0 0",
-            animation: `catSpriteIdle ${duration}s steps(${FRAME_COUNT}) infinite`,
-            // CSS変数でストリップ幅を渡す（@keyframes で参照）
+            animation: `catSpriteIdle ${CYCLE_DURATION} steps(${FRAME_COUNT}) infinite`,
             "--sprite-strip-w": `${stripW}px`,
+            // 左右をクリップして隣フレームのはみ出しを隠す
+            clipPath: `inset(0 ${clipPx}px)`,
           } as React.CSSProperties
         }
       />
