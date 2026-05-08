@@ -97,3 +97,9 @@ body {
 }
 .ribbon::before { left: -10px; }
 .ribbon::after { right: -10px; }
+
+/* 猫スプライトシートアニメーション
+   --sprite-strip-w: スプライトストリップの全幅 (px) */
+@keyframes catSpriteIdle {
+  to { background-position-x: calc(var(--sprite-strip-w) * -1); }
+}
