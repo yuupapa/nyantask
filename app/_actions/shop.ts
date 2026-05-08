@@ -229,5 +229,6 @@ export async function useItem(itemId: string): Promise<string> {
 
   revalidatePath("/");
   revalidatePath("/shop");
+  revalidatePath("/cat");
   return message;
 }

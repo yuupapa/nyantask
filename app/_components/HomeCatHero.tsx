@@ -41,7 +41,7 @@ export function HomeCatHero({ remaining, completed, total }: Props) {
         style={{
           position: "absolute",
           right: "0%",
-          top: "-30px",
+          top: "10px",
           width: "52%",
           zIndex: 3,
         }}
