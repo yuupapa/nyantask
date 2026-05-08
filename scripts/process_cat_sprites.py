@@ -2,9 +2,9 @@
 猫キャラクターシート処理スクリプト
   - 白背景を除去
   - 4x2グリッドを8コマに分割
-  - 上段4コマ → idle スプライトストリップ（横並び）
+  - 上段4コマ → idle フレームを1枚ずつ個別保存（{name}-idle-0.png 〜 -3.png）
     ※ 体の中心を全フレームで揃えて横ブレを除去
-  - 下段4コマ → 表情フレーム（個別 PNG）
+  - 下段4コマ → 表情フレーム（個別 PNG: happy / sparkle / sad / normal）
 """
 
 from PIL import Image
@@ -88,13 +88,12 @@ def process(name: str, filename: str, cols: int = 4, rows: int = 2):
             cell = src.crop((col * cw, row * ch, (col + 1) * cw, (row + 1) * ch))
             cells.append(remove_white_bg(cell))
 
-    # ── idle: 体中心を揃えてから横並びストリップを生成
+    # ── idle: 体中心を揃えてから 1フレームずつ個別保存
     idle_aligned = align_frames(cells[:4])
-    strip = Image.new("RGBA", (cw * 4, ch), (0, 0, 0, 0))
     for i, cell in enumerate(idle_aligned):
-        strip.paste(cell, (i * cw, 0), cell)
-    strip.save(os.path.join(OUT_DIR, f"{name}-idle.png"), optimize=True)
-    print(f"  OK {name}-idle.png  ({cw*4}x{ch}px, aligned)")
+        out_path = os.path.join(OUT_DIR, f"{name}-idle-{i}.png")
+        cell.save(out_path, optimize=True)
+        print(f"  OK {name}-idle-{i}.png  ({cw}x{ch}px)")
 
     # ── 表情フレーム（下段4コマ個別保存）
     for i, expr in enumerate(EXPRESSIONS):
