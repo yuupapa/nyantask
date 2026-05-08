@@ -52,9 +52,6 @@ export function CatSprite({
   const stripW = displayW * FRAME_COUNT;
 
   if (state === "idle") {
-    // フレーム間で尻尾が隣コマにはみ出す場合があるため
-    // clip-path で左右 12px ずつカットして隠す
-    const clipPx = 12;
     return (
       <div
         className={className}
@@ -68,8 +65,6 @@ export function CatSprite({
             backgroundPosition: "0 0",
             animation: `catSpriteIdle ${CYCLE_DURATION} steps(${FRAME_COUNT}) infinite`,
             "--sprite-strip-w": `${stripW}px`,
-            // 左右をクリップして隣フレームのはみ出しを隠す
-            clipPath: `inset(0 ${clipPx}px)`,
           } as React.CSSProperties
         }
       />
