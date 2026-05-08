@@ -201,6 +201,7 @@ export async function updateCatName(catId: string, newName: string): Promise<voi
 
   revalidatePath("/");
   revalidatePath("/cats");
+  revalidatePath("/cat");
 }
 
 // ============================================================
@@ -266,6 +267,10 @@ export async function petCat(): Promise<void> {
       note: `なでなでで Lv ${beforeLv} → ${afterLv}`,
     });
   }
+
+  revalidatePath("/");
+  revalidatePath("/cats");
+  revalidatePath("/cat");
 }
 
 // ============================================================
@@ -324,4 +329,5 @@ export async function summonNewCat(): Promise<void> {
 
   revalidatePath("/");
   revalidatePath("/cats");
+  revalidatePath("/cat");
 }

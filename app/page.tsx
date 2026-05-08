@@ -141,7 +141,7 @@ export default async function Home() {
             <section className="grid grid-cols-2 gap-3">
               {/* 育成カード */}
               <Link
-                href="/cats"
+                href="/cat"
                 className="bg-white rounded-2xl p-4 shadow-sm border border-yellow-100 hover:shadow-md transition flex flex-col items-center gap-2"
               >
                 <div className="flex items-center gap-1 text-xs font-bold text-yellow-600 self-start">
