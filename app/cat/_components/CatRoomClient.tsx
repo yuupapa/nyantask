@@ -106,12 +106,12 @@ export function CatRoomClient({ cat, userItems, pawBalance, hasApiKey }: Props) 
         {/* 猫（スプライトアニメ） */}
         <div
           className="absolute"
-          style={{ bottom: 30, left: "50%", transform: "translateX(-50%)" }}
+          style={{ bottom: 24, left: "50%", transform: "translateX(-50%)" }}
         >
           <CatSprite
             visualId={cat.visual_id ?? 1}
             state="idle"
-            height={220}
+            height={252}
           />
         </div>
 

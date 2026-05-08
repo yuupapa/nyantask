@@ -52,22 +52,34 @@ export function CatSprite({
   const stripW = displayW * FRAME_COUNT;
 
   if (state === "idle") {
+    // 外側div: 1フレーム幅でclip、内側div: ストリップ全幅をtranslateXでスライド
+    // overflow:hidden が確実にクリップするため隣コマの猫が見えない
     return (
       <div
         className={className}
-        style={
-          {
-            width: displayW,
+        style={{
+          width: displayW,
+          height,
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            width: stripW,
             height,
             backgroundImage: `url(/cats/sprites/${name}-idle.png)`,
             backgroundSize: `${stripW}px ${height}px`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "0 0",
-            animation: `catSpriteIdle ${CYCLE_DURATION} steps(${FRAME_COUNT}) infinite`,
-            "--sprite-strip-w": `${stripW}px`,
-          } as React.CSSProperties
-        }
-      />
+            // translateX(-100%) = -stripW（自身幅に対する割合なのでカスタムプロパティ不要）
+            animation: `catSpriteIdleSlide ${CYCLE_DURATION} steps(${FRAME_COUNT}) infinite`,
+          }}
+        />
+      </div>
     );
   }
 
