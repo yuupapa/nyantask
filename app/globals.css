@@ -98,5 +98,27 @@ body {
 .ribbon::before { left: -10px; }
 .ribbon::after { right: -10px; }
 
-/* 猫アニメーションは JS (setInterval) でフレーム切り替えするため
-   CSS キーフレームは不要（削除済み） */
+/* 猫の待機アニメーション */
+@keyframes cat-idle {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  30% {
+    transform: translateY(-4px) rotate(0.5deg);
+  }
+  70% {
+    transform: translateY(-2px) rotate(-0.5deg);
+  }
+}
+
+.cat-idle {
+  animation: cat-idle 3s ease-in-out infinite;
+  transform-origin: center bottom;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cat-idle {
+    animation: none;
+  }
+}
