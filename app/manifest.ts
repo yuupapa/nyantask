@@ -19,6 +19,15 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#FF7B9C",
     lang: "ja",
     categories: ["productivity", "lifestyle"],
+    icons: [
+      { src: "/icon", sizes: "192x192", type: "image/png", purpose: "any" },
+      {
+        src: "/icon0",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "any maskable",
+      },
+    ],
     // Chrome Web Push (FCM) に必要な固定値
     gcm_sender_id: "103953800507",
   } as MetadataRoute.Manifest & { gcm_sender_id: string };

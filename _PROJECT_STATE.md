@@ -7,7 +7,7 @@
 
 ## 現在のフェーズ
 
-- **フェーズ**：**Phase 1.6 コード完了**（PWA + Gemini + Web Push 実装済）— 残タスク：Edge Functions cron + 細部機能
+- **フェーズ**：**Phase 2 準備中**（Phase 1 全機能完了、テスト展開準備）
 - **目標期日**：Phase 1 全体で1.5〜2ヶ月
 - **状態**：active
 
@@ -21,11 +21,17 @@ Phase 1.2〜1.6 コード実装完了（2026-05-03）：
 - **Phase 1.6**：PWA（manifest.ts + public/sw.js + ServiceWorkerRegister）、Gemini API（generateCatMessage、CatTalkButton）、Web Push（saveSubscription / broadcastNotification / sendTestNotification）、設定画面（APIキー + Push購読）
 
 **残タスク（コード未実装）：**
-1. Supabase Edge Functions cron（時間減衰・ステージ進行の定期実行）※ 現状は ホームアクセス時に lazy eval で代替中
+1. ~~Supabase Edge Functions cron（時間減衰・ステージ進行の定期実行）~~ ✅ 実装済み（pg_cron）
 2. ~~レア報酬枠~~ ✅ 実装済み（2026-05-06）
 3. ~~ストリークボーナス~~ ✅ 実装済み（2026-05-06）
 4. ~~猫の名前変更 UI~~ ✅ 実装済み（2026-05-06）
-5. 管理画面でのブロードキャスト通知 UI
+5. ~~管理画面でのブロードキャスト通知 UI~~ ✅ 実装済み
+
+**Phase 2 準備（2026-06-08〜）：**
+- 猫100匹ビジュアル実装完了（PR #34マージ、CatSprite.tsx → next/image ベース）
+- OGP画像・PWA manifest icons 整備
+- 利用規約・プライバシーポリシーページ作成
+- キャラクターシート（差分画像）残り80匹を結パパが作成中
 
 **Supabase に未適用の可能性がある migration：**
 - `20260503040000_gemini_apikey.sql`（profiles.gemini_api_key カラム追加）
@@ -87,6 +93,7 @@ Phase 1.2〜1.6 コード実装完了（2026-05-03）：
 
 ## 直近の判断・決定事項
 
+- 2026-06-08：**猫100匹ビジュアル実装完了**（Codex実装→Claude Codeレビュー）。CatSprite.tsx を next/image ベースに全面改修。CSS idle アニメ追加。旧スプライトブランチ13本を整理削除
 - 2026-05-06：**Phase 1.6 コード完了を確認**。コード実態と `_PROJECT_STATE.md` の乖離を修正（Phase 1.2〜1.6 すべてコード実装済みが判明）。残タスクは Edge Functions / レア報酬枠 / ストリークボーナス / 猫名変更UI / Supabase未適用 migration 2本。
 - 2026-05-06：**Phase 1.2 完了**。タスクCRUD（ルーチン/デイリー分離）、通貨システム（おさかな + パーフェクトボーナス）、猫との連携（feedActiveCat/unfeedActiveCat）、達成率UI、RLS多ユーザー検証まで完了
 - 2026-05-03：**Phase 1.1 完了**。管理画面（layout/dashboard/users/invitations）、ロール変更機能、UI日本語化、Server-only モジュール分離まで完了。各セッション終わりにTypeScript/ESLint/dev動作確認のチェック工程を必ず踏むルールを採用
@@ -126,17 +133,11 @@ Phase 1.2〜1.6 コード実装完了（2026-05-03）：
 
 優先度順：
 
-1. ✅ **【完了】Supabase migration 適用**（2026-05-07 実施済み）
-2. ✅ **【完了】管理画面ブロードキャスト通知 UI**（2026-05-07 実装済み）
-3. **動作確認・テスト運用**（Phase 2 準備：コンサル生10名への展開）
-4. ✅ **【完了】pg_cron 時間減衰**（2026-05-07 実施済み）
-5. ✅ **【完了】Gemini API キーの Supabase Vault 移行**（2026-05-07 実施済み）
-6. ✅ **【完了】ショップ機能 + コイン移行**（2026-05-07 実施済み）
-   - 🐟おさかな → 🪙コイン（DB・コード・UI 全体リネーム）
-   - 餌3種（ふつうのエサ/プレミアムフード/特選まぐろ）
-   - おもちゃ3種（ねこじゃらし/まりボール/またたびクッション）
-   - `/shop` ページ + 持ち物管理
+1. **キャラクターシート（差分画像）残り80匹分の作成**（結パパ進行中）
+2. **コンサル生10名へのテスト展開**
+3. **フィードバック収集体制の構築**
+4. **Phase 2 機能企画**（ショップ拡張・イベント・ランキング等）
 
 ---
 
-更新日：2026-05-07（Migration 適用完了・ブロードキャスト通知 UI 実装完了・Gemini キー管理注意事項追記）
+更新日：2026-06-08（Phase 2 準備中に移行・猫100匹ビジュアル実装完了・Phase 1 全残作業完了）
