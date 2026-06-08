@@ -28,7 +28,7 @@ export default function PrivacyPage() {
             </li>
             <li>
               <span className="font-semibold">Gemini API キー:</span>{" "}
-              ユーザーが自ら設定した API キー（Supabase データベースに保存）
+              ユーザーが自ら設定した API キー（Supabase Vault で暗号化して保存）
             </li>
             <li>
               <span className="font-semibold">Cookie・セッション情報:</span>{" "}
@@ -87,9 +87,14 @@ export default function PrivacyPage() {
             4. データの削除
           </h2>
           <p className="text-gray-600 leading-relaxed">
-            アカウントを削除すると、本サービスに保存されたすべてのデータ
+            アカウント削除機能は今後提供予定です。
+            提供後は、アカウントを削除すると本サービスに保存されたすべてのデータ
             （タスク情報、猫の育成データ、API キー、通知設定など）が完全に削除されます。
             削除後のデータ復元はできません。
+          </p>
+          <p className="text-gray-600 leading-relaxed mt-2">
+            アカウント削除機能の提供前にデータの削除をご希望の場合は、
+            下記のお問い合わせ先までご連絡ください。
           </p>
         </section>
 
