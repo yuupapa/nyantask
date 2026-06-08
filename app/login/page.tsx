@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/client";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { DECOR_ASSETS, LOGIN_VIEWBOX, pct } from "./_assets";
 
 // ============================================================
@@ -153,8 +154,8 @@ export default function LoginPage() {
             <span>🔒</span>
             <span>
               ログインすると、
-              <span className="underline">利用規約</span>と
-              <span className="underline">プライバシーポリシー</span>に
+              <Link href="/terms" className="underline">利用規約</Link>と
+              <Link href="/privacy" className="underline">プライバシーポリシー</Link>に
               同意したことになります。
             </span>
           </p>
