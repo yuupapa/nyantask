@@ -94,6 +94,13 @@
   }
   .page-sign { text-align: right; font-size: 10pt; letter-spacing: .12em; margin: 6mm 0 3mm; }
 
+  /* 挿絵レイヤー(AI生成画像を敷く場合に使用。§artwork-prompts.md 参照) */
+  .bg-art {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; opacity: .08; pointer-events: none; z-index: 0;
+  }
+  .cover > *, .body-page > * { position: relative; z-index: 1; }
+
   /* 編集可能領域のガイド(画面のみ) */
   @media screen {
     [contenteditable="true"] { outline: 1px dashed rgba(138,155,176,.45); outline-offset: 2px; min-height: 1.5em; }
@@ -113,6 +120,9 @@
 
 <!-- ============ 1枚目:表紙 ============ -->
 <section class="page cover">
+  <!-- 挿絵を入れる場合:下の行のコメントを外し、src を生成した画像ファイル名に変更
+       (このHTMLと同じフォルダに art-cover.png を置く。プロンプトは artwork-prompts.md) -->
+  <!-- <img class="bg-art" src="art-cover.png" alt=""> -->
   <div class="mark">∞</div>
   <h1>数秘鑑定書</h1>
   <div class="sub">— 数字で読み解く、あなたの物語 —</div>
@@ -126,6 +136,8 @@
 
 <!-- ============ 2枚目:本文 ============ -->
 <section class="page body-page">
+  <!-- 本文ページの挿絵(表紙より薄くしたい場合は style="opacity:.05" を追加) -->
+  <!-- <img class="bg-art" src="art-body.png" alt=""> -->
   <div class="lead-greeting" contenteditable="true">
     このたびはご依頼ありがとうございます。【男性心理×数秘】八雲です。お預かりした情報をもとに、数字を読み解いてまいります。
   </div>
@@ -151,7 +163,7 @@
   <div class="page-sign" contenteditable="true">【男性心理×数秘】八雲</div>
 
   <div class="disclaimer">
-    ※本鑑定はエンターテインメント/自己分析を目的とし、医療・法律・投資の助言ではなく、結果を保証するものではありません。最終判断はご自身でなさってください。深刻なお悩み(健康・法律・金銭)は専門機関へご相談ください。鑑定文の作成にはAIを補助的に使用し、内容は鑑定士が確認・調整しています。
+    ※本鑑定はエンターテインメント/自己分析を目的とし、医療・法律・投資の助言ではなく、結果を保証するものではありません。最終判断はご自身でなさってください。深刻なお悩み(健康・法律・金銭)は専門機関へご相談ください。鑑定文および挿絵の作成にはAIを補助的に使用し、内容は鑑定士が確認・調整しています。
   </div>
 </section>
 
