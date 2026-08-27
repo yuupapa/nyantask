@@ -94,12 +94,32 @@
   }
   .page-sign { text-align: right; font-size: 10pt; letter-spacing: .12em; margin: 6mm 0 3mm; }
 
-  /* 挿絵レイヤー(AI生成画像を敷く場合に使用。§artwork-prompts.md 参照) */
+  /* 印刷後にペンで一言を書き込む欄。
+     手書きのメッセージは、速記より「思いが込められている」、タイプより「丁寧」と
+     読み手に評価される(NTTデータ経営研究所ほか アナログ価値研究会 2017 の実験)。
+     所要は10〜20秒なので、1件あたりの作業時間の見積りを崩さない。 */
+  .handwrite {
+    margin: 5mm 0 2mm; padding: 4mm 6mm 9mm;
+    border: 1px solid var(--line); border-radius: 2mm; background: #FFFFFF;
+  }
+  .handwrite .label {
+    font-family: "Yu Gothic", "Meiryo", sans-serif;
+    font-size: 7.5pt; letter-spacing: .1em; color: var(--ink-soft);
+  }
+  .handwrite .rule { border-bottom: 1px dotted var(--line); height: 8mm; }
+
+  /* 背景挿絵レイヤー。
+     既定は images/art-cover.png・images/art-body.png(数秘の円環図。線画のみで
+     AI生成画像を含まない)。画像側で最終濃度まで作り込んであるので opacity は 1。
+     AI生成画像に差し替える場合は src を変えたうえで opacity を .10〜.15 に落とす
+     (写真調の画像は濃度が高く、そのままでは本文が読めなくなるため)。 */
   .bg-art {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; opacity: .08; pointer-events: none; z-index: 0;
+    object-fit: cover; opacity: 1; pointer-events: none; z-index: 0;
   }
-  .cover > *, .body-page > * { position: relative; z-index: 1; }
+  /* 背景画像だけは絶対配置のまま残す(:not を外すと .bg-art が
+     フローに戻り、flex アイテムとして本文を押し下げてしまう) */
+  .cover > *:not(.bg-art), .body-page > *:not(.bg-art) { position: relative; z-index: 1; }
 
   /* 編集可能領域のガイド(画面のみ) */
   @media screen {
@@ -120,9 +140,7 @@
 
 <!-- ============ 1枚目:表紙 ============ -->
 <section class="page cover">
-  <!-- 挿絵を入れる場合:下の行のコメントを外し、src を生成した画像ファイル名に変更
-       (このHTMLと同じフォルダに art-cover.png を置く。プロンプトは artwork-prompts.md) -->
-  <!-- <img class="bg-art" src="art-cover.png" alt=""> -->
+  <img class="bg-art" src="images/art-cover.png" alt="">
   <div class="mark">∞</div>
   <h1>数秘鑑定書</h1>
   <div class="sub">— 数字で読み解く、あなたの物語 —</div>
@@ -136,8 +154,7 @@
 
 <!-- ============ 2枚目:本文 ============ -->
 <section class="page body-page">
-  <!-- 本文ページの挿絵(表紙より薄くしたい場合は style="opacity:.05" を追加) -->
-  <!-- <img class="bg-art" src="art-body.png" alt=""> -->
+  <img class="bg-art" src="images/art-body.png" alt="">
   <div class="lead-greeting" contenteditable="true">
     このたびはご依頼ありがとうございます。【男性心理×数秘】八雲です。お預かりした情報をもとに、数字を読み解いてまいります。
   </div>
@@ -160,10 +177,15 @@
   <h2><span class="num">05</span>前向きな一歩</h2>
   <div class="block" contenteditable="true">(ここに本文を貼り付け)</div>
 
+  <div class="handwrite">
+    <div class="label">鑑定士より、手書きで一言</div>
+    <div class="rule"></div>
+  </div>
+
   <div class="page-sign" contenteditable="true">【男性心理×数秘】八雲</div>
 
   <div class="disclaimer">
-    ※本鑑定はエンターテインメント/自己分析を目的とし、医療・法律・投資の助言ではなく、結果を保証するものではありません。最終判断はご自身でなさってください。深刻なお悩み(健康・法律・金銭)は専門機関へご相談ください。鑑定文および挿絵の作成にはAIを補助的に使用し、内容は鑑定士が確認・調整しています。
+    ※本鑑定はエンターテインメント/自己分析を目的とし、医療・法律・投資の助言ではなく、結果を保証するものではありません。最終判断はご自身でなさってください。深刻なお悩み(健康・法律・金銭)は専門機関へご相談ください。鑑定文の作成にはAIを補助的に使用し、内容は鑑定士が確認・調整しています。
   </div>
 </section>
 
