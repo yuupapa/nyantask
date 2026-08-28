@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>数秘鑑定書テンプレート|【男性心理×数秘】八雲</title>
+<style>
+  :root {
+    --paper: #FBF9F4;      /* アイボリー */
+    --ink: #44424B;        /* 墨色 */
+    --ink-soft: #8B8894;
+    --blue: #8A9BB0;       /* くすみブルー */
+    --gold: #C4B28A;       /* 淡金 */
+    --pink: #D9BFB2;       /* ピンクベージュ */
+    --line: #E4DED2;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #EBE7DE; }
+  body {
+    font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "MS Mincho", serif;
+    color: var(--ink);
+    line-height: 2.0;
+    font-size: 10.5pt;
+  }
+  /* ===== 画面表示時のみの説明バー(印刷されない) ===== */
+  .noprint {
+    max-width: 210mm; margin: 16px auto; padding: 14px 20px;
+    background: #FFF; border: 1px solid var(--line); border-radius: 8px;
+    font-family: "Yu Gothic", "Meiryo", sans-serif; font-size: 13px; line-height: 1.8;
+  }
+  .noprint b { color: #2A6E4F; }
+  @media print { .noprint { display: none; } html, body { background: var(--paper); } }
+
+  /* ===== A4ページ ===== */
+  @page { size: A4; margin: 0; }
+  .page {
+    width: 210mm; min-height: 296mm;
+    margin: 0 auto 16px; padding: 20mm 22mm;
+    background: var(--paper);
+    position: relative;
+    page-break-after: always;
+    overflow: hidden;
+  }
+  @media print { .page { margin: 0; box-shadow: none; } }
+  @media screen { .page { box-shadow: 0 2px 12px rgba(0,0,0,.12); } }
+
+  /* 罫線の額縁 */
+  .page::before {
+    content: ""; position: absolute; inset: 9mm;
+    border: 1px solid var(--gold); pointer-events: none;
+  }
+  .page::after {
+    content: ""; position: absolute; inset: 10.5mm;
+    border: 1px solid var(--line); pointer-events: none;
+  }
+
+  /* ===== 表紙 ===== */
+  .cover { text-align: center; display: flex; flex-direction: column; justify-content: center; }
+  .cover .mark {
+    font-size: 64pt; color: var(--blue); opacity: .35; line-height: 1;
+    font-family: "Yu Mincho", serif; margin-bottom: 8mm;
+  }
+  .cover h1 {
+    font-size: 26pt; font-weight: 600; letter-spacing: .35em; text-indent: .35em;
+    margin-bottom: 6mm;
+  }
+  .cover .sub { font-size: 10pt; color: var(--ink-soft); letter-spacing: .2em; margin-bottom: 22mm; }
+  .cover .for {
+    font-size: 14pt; letter-spacing: .1em; margin-bottom: 4mm;
+    border-bottom: 1px solid var(--gold); display: inline-block;
+    align-self: center; padding: 0 12mm 2mm;
+  }
+  .cover .date { font-size: 9.5pt; color: var(--ink-soft); margin-bottom: 26mm; }
+  .cover .sign { font-size: 11pt; letter-spacing: .15em; }
+  .cover .sign small { display: block; font-size: 8.5pt; color: var(--ink-soft); letter-spacing: .3em; margin-top: 2mm; }
+
+  /* ===== 本文ページ ===== */
+  .body-page { display: flex; flex-direction: column; }
+  h2 {
+    font-size: 11.5pt; font-weight: 600; letter-spacing: .12em;
+    color: var(--ink); margin: 7mm 0 2.5mm;
+    padding-left: 4mm; border-left: 3px solid var(--blue);
+    line-height: 1.5;
+  }
+  h2 .num { color: var(--gold); font-size: 9pt; margin-right: 2mm; letter-spacing: .05em; }
+  .block { min-height: 14mm; padding: 0 1mm; }
+  .calc {
+    background: #FFFFFF; border: 1px solid var(--line); border-radius: 2mm;
+    padding: 3mm 5mm; margin: 2mm 0; font-size: 10pt; line-height: 1.9;
+  }
+  .lead-greeting { margin-top: 4mm; min-height: 12mm; }
+  .disclaimer {
+    margin-top: auto; padding-top: 4mm; border-top: 1px solid var(--line);
+    font-size: 8pt; color: var(--ink-soft); line-height: 1.7;
+  }
+  .page-sign { text-align: right; font-size: 10pt; letter-spacing: .12em; margin: 6mm 0 3mm; }
+
+  /* 印刷後にペンで一言を書き込む欄。
+     手書きのメッセージは、速記より「思いが込められている」、タイプより「丁寧」と
+     読み手に評価される(NTTデータ経営研究所ほか アナログ価値研究会 2017 の実験)。
+     所要は10〜20秒なので、1件あたりの作業時間の見積りを崩さない。 */
+  .handwrite {
+    margin: 5mm 0 2mm; padding: 4mm 6mm 9mm;
+    border: 1px solid var(--line); border-radius: 2mm; background: #FFFFFF;
+  }
+  .handwrite .label {
+    font-family: "Yu Gothic", "Meiryo", sans-serif;
+    font-size: 7.5pt; letter-spacing: .1em; color: var(--ink-soft);
+  }
+  .handwrite .rule { border-bottom: 1px dotted var(--line); height: 8mm; }
+
+  /* 背景挿絵レイヤー。
+     既定は images/art-cover.png・images/art-body.png(数秘の円環図。線画のみで
+     AI生成画像を含まない)。画像側で最終濃度まで作り込んであるので opacity は 1。
+     AI生成画像に差し替える場合は src を変えたうえで opacity を .10〜.15 に落とす
+     (写真調の画像は濃度が高く、そのままでは本文が読めなくなるため)。 */
+  .bg-art {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; opacity: 1; pointer-events: none; z-index: 0;
+  }
+  /* 背景画像だけは絶対配置のまま残す(:not を外すと .bg-art が
+     フローに戻り、flex アイテムとして本文を押し下げてしまう) */
+  .cover > *:not(.bg-art), .body-page > *:not(.bg-art) { position: relative; z-index: 1; }
+
+  /* 編集可能領域のガイド(画面のみ) */
+  @media screen {
+    [contenteditable="true"] { outline: 1px dashed rgba(138,155,176,.45); outline-offset: 2px; min-height: 1.5em; }
+    [contenteditable="true"]:hover { background: rgba(138,155,176,.06); }
+  }
+</style>
+</head>
+<body>
+
+<div class="noprint">
+  <b>使い方(3ステップ)</b><br>
+  ① 点線の枠内をクリックして、AIで生成→検品済みの鑑定文を貼り付け(お名前・日付も書き換え)<br>
+  ② Ctrl+P(印刷)→ 用紙A4・余白「なし」・<b>「背景のグラフィック」にチェック</b><br>
+  ③ 印刷して封入(このバーは印刷されません)<br>
+  ※入口商品は表紙+本文1枚(2ページ目まで)。詳細鑑定は本文ページをコピーして3〜4枚に。
+</div>
+
+<!-- ============ 1枚目:表紙 ============ -->
+<section class="page cover">
+  <img class="bg-art" src="images/art-cover.png" alt="">
+  <div class="mark">∞</div>
+  <h1>数秘鑑定書</h1>
+  <div class="sub">— 数字で読み解く、あなたの物語 —</div>
+  <div class="for" contenteditable="true">みさき さま</div>
+  <div class="date" contenteditable="true">2026年8月吉日</div>
+  <div class="sign">
+    【男性心理×数秘】八雲
+    <small>YAKUMO — NUMEROLOGY READING</small>
+  </div>
+</section>
+
+<!-- ============ 2枚目:本文 ============ -->
+<section class="page body-page">
+  <img class="bg-art" src="images/art-body.png" alt="">
+  <div class="lead-greeting" contenteditable="true">
+    このたびはご依頼ありがとうございます。【男性心理×数秘】八雲です。お預かりした情報をもとに、数字を読み解いてまいります。
+  </div>
+
+  <h2><span class="num">01</span>あなたの数字</h2>
+  <div class="calc" contenteditable="true">
+    お誕生日の数字をすべて足していきます。<br>
+    1+9+9+◯+◯+◯=◯◯、◯+◯=◯ … あなたのライフパスナンバーは「◯」です。
+  </div>
+
+  <h2><span class="num">02</span>数字が示すあなたの本質</h2>
+  <div class="block" contenteditable="true">(ここに本文を貼り付け)</div>
+
+  <h2><span class="num">03</span>お相手の数字と、彼の側から見た心理</h2>
+  <div class="block" contenteditable="true">(ここに本文を貼り付け)</div>
+
+  <h2><span class="num">04</span>お二人の数字の相性と、いまの流れ</h2>
+  <div class="block" contenteditable="true">(ここに本文を貼り付け)</div>
+
+  <h2><span class="num">05</span>前向きな一歩</h2>
+  <div class="block" contenteditable="true">(ここに本文を貼り付け)</div>
+
+  <div class="handwrite">
+    <div class="label">鑑定士より、手書きで一言</div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="page-sign" contenteditable="true">【男性心理×数秘】八雲</div>
+
+  <div class="disclaimer">
+    ※本鑑定はエンターテインメント/自己分析を目的とし、医療・法律・投資の助言ではなく、結果には個人差があり、効果や成果を保証するものではありません。最終判断はご自身でなさってください。深刻なお悩み(健康・法律・金銭)は専門機関へご相談ください。鑑定文の作成にはAIを補助的に使用し、内容は鑑定士が確認・調整しています。
+  </div>
+</section>
+
+</body>
+</html>

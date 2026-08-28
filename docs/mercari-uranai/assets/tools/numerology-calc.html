@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>数秘計算ツール|八雲</title>
+<style>
+  :root {
+    --cream: #FAF1E4; --blue: #A9C4D8; --pink: #F4CFCB;
+    --gold: #E3A857; --text: #4A3E38; --line: #E4DED2; --soft: #8B8894;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--cream); color: var(--text);
+    font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+    padding: 24px 16px 64px; line-height: 1.8;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 22px; letter-spacing: .06em; margin-bottom: 6px; }
+  .lead { font-size: 13.5px; color: #6E675F; margin-bottom: 22px; }
+  .lead b { color: #A0522D; }
+
+  .card {
+    background: #FFF; border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px 20px; margin-bottom: 16px;
+  }
+  .card h2 {
+    font-size: 15px; letter-spacing: .08em; margin-bottom: 12px;
+    padding-left: 10px; border-left: 4px solid var(--blue);
+  }
+  label { display: block; font-size: 13px; margin: 10px 0 4px; color: #6E675F; }
+  input[type=text], input[type=date] {
+    width: 100%; padding: 10px 12px; font-size: 16px; font-family: inherit;
+    border: 1px solid var(--line); border-radius: 8px; background: #FFFDFA; color: var(--text);
+  }
+  input:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+  .hint { font-size: 12px; color: var(--soft); margin-top: 4px; }
+  .row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .row > div { flex: 1 1 220px; }
+
+  button {
+    margin-top: 16px; padding: 12px 28px; font-size: 15px; font-weight: 700;
+    font-family: inherit; color: #FFF; background: var(--gold);
+    border: none; border-radius: 999px; cursor: pointer; letter-spacing: .06em;
+  }
+  button:hover { filter: brightness(1.06); }
+  button.ghost { background: #FFF; color: var(--text); border: 1px solid var(--line); }
+
+  .out { display: none; }
+  .out.show { display: block; }
+  .num-grid { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .num {
+    flex: 1 1 150px; text-align: center; padding: 14px 8px;
+    border-radius: 10px; background: var(--cream); border: 1px solid var(--line);
+  }
+  .num .k { font-size: 12px; color: var(--soft); letter-spacing: .06em; }
+  .num .v { font-size: 40px; font-weight: 700; line-height: 1.2; }
+  .num.master { background: #FDF3E3; border-color: var(--gold); }
+  .num.master .v { color: #B8860B; }
+  .num .m { font-size: 11px; color: #B8860B; font-weight: 700; }
+
+  .work {
+    background: #FFFDFA; border: 1px solid var(--line); border-radius: 8px;
+    padding: 12px 14px; font-size: 13.5px; line-height: 2;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .work b { color: #A0522D; }
+
+  textarea {
+    width: 100%; min-height: 220px; padding: 12px; font-size: 13px; line-height: 1.9;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    border: 1px solid var(--line); border-radius: 8px; background: #FFFDFA; color: var(--text);
+    white-space: pre; overflow-x: auto;
+  }
+  .err { color: #B03A2E; font-size: 13px; margin-top: 10px; font-weight: 700; }
+  .note {
+    font-size: 12.5px; color: #6E675F; background: #FFF; border: 1px dashed var(--line);
+    border-radius: 8px; padding: 12px 14px; margin-top: 18px; line-height: 1.9;
+  }
+  .note h3 { font-size: 13px; margin-bottom: 6px; }
+  .note ul { margin: 4px 0 0 1.2em; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+  th, td { border: 1px solid var(--line); padding: 5px 8px; text-align: center; }
+  th { background: var(--cream); font-weight: 700; }
+  .copied { color: #2A6E4F; font-size: 13px; font-weight: 700; margin-left: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>数秘計算ツール</h1>
+  <p class="lead">
+    鑑定に使う数字を<b>ここで確定させてから</b>AIに渡します。AIに計算そのものをさせると、
+    数字がズレたまま鑑定文が量産されます。計算過程を鑑定書に開示する以上、そこが間違っていると
+    誠実路線そのものが崩れます。
+  </p>
+
+  <div class="card">
+    <h2>依頼者の情報</h2>
+    <div class="row">
+      <div>
+        <label for="c-name">お名前(ヘボン式ローマ字)</label>
+        <input type="text" id="c-name" placeholder="AKARI" autocomplete="off">
+        <div class="hint">姓名を続けて入力(例:SATO AKARI)。空白は無視されます</div>
+      </div>
+      <div>
+        <label for="c-birth">生年月日</label>
+        <input type="date" id="c-birth">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>お相手の情報</h2>
+    <div class="row">
+      <div>
+        <label for="p-name">お名前(ヘボン式ローマ字)</label>
+        <input type="text" id="p-name" placeholder="TAKUMI" autocomplete="off">
+      </div>
+      <div>
+        <label for="p-birth">生年月日(不明なら空欄のまま)</label>
+        <input type="date" id="p-birth">
+      </div>
+    </div>
+    <div class="hint">生年月日が分からない場合は空欄で構いません。名前の数字だけで読む前提の文面になります</div>
+  </div>
+
+  <div class="card">
+    <h2>鑑定日</h2>
+    <div class="row">
+      <div>
+        <label for="today">この日付でパーソナルイヤーを計算します</label>
+        <input type="date" id="today">
+      </div>
+    </div>
+  </div>
+
+  <button id="calc">計算する</button>
+  <button id="clear" class="ghost">入力を消す</button>
+  <div id="err" class="err"></div>
+
+  <div id="out" class="out">
+    <div class="card">
+      <h2>依頼者の数字</h2>
+      <div class="num-grid" id="c-nums"></div>
+      <div class="work" id="c-work"></div>
+    </div>
+
+    <div class="card">
+      <h2>お相手の数字</h2>
+      <div class="num-grid" id="p-nums"></div>
+      <div class="work" id="p-work"></div>
+    </div>
+
+    <div class="card">
+      <h2>AIに渡す確定値</h2>
+      <p class="hint" style="margin-bottom:10px">
+        下の枠をそのままコピーして、鑑定プロンプトの「確定済みの数字」欄に貼り付けてください。
+      </p>
+      <textarea id="payload" readonly></textarea>
+      <button id="copy">コピーする</button><span id="copied" class="copied"></span>
+    </div>
+  </div>
+
+  <div class="note">
+    <h3>ローマ字変換表(この表で数値化しています)</h3>
+    <table>
+      <tr><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th></tr>
+      <tr><td>A J S</td><td>B K T</td><td>C L U</td><td>D M V</td><td>E N W</td><td>F O X</td><td>G P Y</td><td>H Q Z</td><td>I R</td></tr>
+    </table>
+    <h3 style="margin-top:14px">計算の決まり</h3>
+    <ul>
+      <li><b>ライフパス</b>:生年月日の全桁を足し、1桁になるまで足す。途中で 11・22・33 が出たらそこで止める(マスターナンバー)</li>
+      <li><b>ディスティニー</b>:名前のローマ字すべてを上の表で数値化して合計し、同じ規則で還元</li>
+      <li><b>ソウル</b>:名前の母音(A・I・U・E・O)だけを合計して還元</li>
+      <li><b>パーソナルイヤー</b>:生まれた月日の各桁 + 鑑定する年の各桁を合計して還元(詳細鑑定の「今年のテーマ」に使用)</li>
+    </ul>
+    <p style="margin-top:10px">
+      入力はこの画面の中だけで処理され、どこにも送信されません。通信は発生しません。
+    </p>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  var VOWELS = 'AIUEO';
+
+  function digitSum(n) {
+    var s = 0;
+    String(n).split('').forEach(function (c) { s += Number(c); });
+    return s;
+  }
+
+  // 1桁まで還元。ただし途中で 11/22/33 が出たらそこで停止する。
+  function reduce(n) {
+    var steps = [n];
+    while (n > 9 && n !== 11 && n !== 22 && n !== 33) {
+      n = digitSum(n);
+      steps.push(n);
+    }
+    return { value: n, steps: steps, isMaster: (n === 11 || n === 22 || n === 33) };
+  }
+
+  function letterValue(ch) {
+    var code = ch.charCodeAt(0) - 65; // A=0
+    if (code < 0 || code > 25) return null;
+    return (code % 9) + 1;
+  }
+
+  function clean(name) {
+    return (name || '').toUpperCase().replace(/[^A-Z]/g, '');
+  }
+
+  // 足し算の式を組み立てる。年は4桁のまま(1990 の 0 も足す)、
+  // 月日はゼロ埋めを外す(6月を "0+6" ではなく "6" と書く)。鑑定書にそのまま載る式なので。
+  function birthDigits(dateStr) {
+    var y = dateStr.slice(0, 4);
+    var m = String(Number(dateStr.slice(5, 7)));
+    var d = String(Number(dateStr.slice(8, 10)));
+    return (y + m + d).split('');
+  }
+
+  // 1桁に還元していく過程を「3+8=11」の形で並べる
+  function reduceWork(r) {
+    if (r.steps.length <= 1) {
+      return r.isMaster ? '(マスターナンバーのため、ここで確定)' : '';
+    }
+    var parts = r.steps.slice(1).map(function (s, i) {
+      return String(r.steps[i]).split('').join('+') + '=' + s;
+    });
+    return ' → ' + parts.join(' → ') + (r.isMaster ? '(マスターナンバーのため、ここで確定)' : '');
+  }
+
+  // 生年月日の全桁を足す
+  function lifePath(dateStr) {
+    var digits = birthDigits(dateStr);
+    var total = digits.reduce(function (a, c) { return a + Number(c); }, 0);
+    var r = reduce(total);
+    var y = dateStr.slice(0, 4), m = dateStr.slice(5, 7), dd = dateStr.slice(8, 10);
+    var work = Number(y) + '年' + Number(m) + '月' + Number(dd) + '日 → '
+      + digits.join('+') + '=' + total + reduceWork(r);
+    return { num: r, work: work, total: total };
+  }
+
+  function nameNumber(name, vowelsOnly) {
+    var letters = clean(name).split('');
+    if (vowelsOnly) letters = letters.filter(function (c) { return VOWELS.indexOf(c) >= 0; });
+    if (!letters.length) return null;
+    var vals = letters.map(letterValue);
+    var total = vals.reduce(function (a, b) { return a + b; }, 0);
+    var r = reduce(total);
+    var pairs = letters.map(function (c, i) { return c + '=' + vals[i]; }).join('、');
+    var work = pairs + ' → 合計' + total + reduceWork(r);
+    return { num: r, work: work, total: total, letters: letters.join('') };
+  }
+
+  function personalYear(birthStr, todayStr) {
+    var mm = String(Number(birthStr.slice(5, 7)));
+    var dd = String(Number(birthStr.slice(8, 10)));
+    var yyyy = todayStr.slice(0, 4);
+    var digits = (mm + dd + yyyy).split('');
+    var total = digits.reduce(function (a, c) { return a + Number(c); }, 0);
+    var r = reduce(total);
+    var work = mm + '月' + dd + '日 + ' + yyyy + '年 → '
+      + digits.join('+') + '=' + total + reduceWork(r);
+    return { num: r, work: work };
+  }
+
+  function numCard(key, r) {
+    var master = r.isMaster ? ' master' : '';
+    return '<div class="num' + master + '"><div class="k">' + key + '</div>'
+      + '<div class="v">' + r.value + '</div>'
+      + (r.isMaster ? '<div class="m">マスターナンバー</div>' : '') + '</div>';
+  }
+
+  function el(id) { return document.getElementById(id); }
+
+  el('calc').addEventListener('click', function () {
+    var cName = el('c-name').value, cBirth = el('c-birth').value;
+    var pName = el('p-name').value, pBirth = el('p-birth').value;
+    var today = el('today').value;
+    var errs = [];
+
+    if (!clean(cName)) errs.push('依頼者のお名前(ローマ字)を入力してください');
+    if (!cBirth) errs.push('依頼者の生年月日を入力してください');
+    if (!clean(pName) && !pBirth) errs.push('お相手のお名前かお生まれの日、どちらかは必要です');
+    if (!today) errs.push('鑑定日を入力してください');
+
+    if (errs.length) {
+      el('err').textContent = errs.join(' / ');
+      el('out').classList.remove('show');
+      return;
+    }
+    el('err').textContent = '';
+
+    var lines = [];
+
+    // --- 依頼者 ---
+    var cLp = lifePath(cBirth);
+    var cDs = nameNumber(cName, false);
+    var cSl = nameNumber(cName, true);
+    var cPy = personalYear(cBirth, today);
+
+    var html = numCard('ライフパス', cLp.num);
+    if (cDs) html += numCard('ディスティニー', cDs.num);
+    if (cSl) html += numCard('ソウル', cSl.num);
+    html += numCard('パーソナルイヤー', cPy.num);
+    el('c-nums').innerHTML = html;
+
+    var cw = 'ライフパス:' + cLp.work + '\n';
+    if (cDs) cw += 'ディスティニー:' + cDs.letters + ' → ' + cDs.work + '\n';
+    if (cSl) cw += 'ソウル(母音のみ):' + cSl.work + '\n';
+    cw += 'パーソナルイヤー:' + cPy.work;
+    el('c-work').textContent = cw;
+
+    // --- お相手 ---
+    var pLp = pBirth ? lifePath(pBirth) : null;
+    var pDs = clean(pName) ? nameNumber(pName, false) : null;
+    var pSl = clean(pName) ? nameNumber(pName, true) : null;
+
+    var ph = '';
+    if (pLp) ph += numCard('ライフパス', pLp.num);
+    if (pDs) ph += numCard('ディスティニー', pDs.num);
+    if (pSl) ph += numCard('ソウル', pSl.num);
+    el('p-nums').innerHTML = ph;
+
+    var pw = '';
+    if (pLp) pw += 'ライフパス:' + pLp.work + '\n';
+    if (pDs) pw += 'ディスティニー:' + pDs.letters + ' → ' + pDs.work + '\n';
+    if (pSl) pw += 'ソウル(母音のみ):' + pSl.work;
+    if (!pBirth) pw += '\n※生年月日が未提供のため、ライフパスは出していません。鑑定文では「生年月日が分かればさらに深く読めます」と一言添えてください。';
+    el('p-work').textContent = pw.trim();
+
+    // --- AIに渡す確定値 ---
+    lines.push('# 確定済みの数字(計算はツールで実施済み。AIは計算しないこと)');
+    lines.push('');
+    lines.push('## 依頼者:' + clean(cName));
+    lines.push('- ライフパスナンバー:' + cLp.num.value + (cLp.num.isMaster ? '(マスターナンバー)' : ''));
+    lines.push('  計算過程:' + cLp.work);
+    if (cDs) {
+      lines.push('- ディスティニーナンバー:' + cDs.num.value + (cDs.num.isMaster ? '(マスターナンバー)' : ''));
+      lines.push('  計算過程:' + cDs.work);
+    }
+    if (cSl) {
+      lines.push('- ソウルナンバー:' + cSl.num.value + (cSl.num.isMaster ? '(マスターナンバー)' : ''));
+      lines.push('  計算過程:' + cSl.work);
+    }
+    lines.push('- パーソナルイヤーナンバー:' + cPy.num.value);
+    lines.push('  計算過程:' + cPy.work);
+    lines.push('');
+    lines.push('## お相手:' + (clean(pName) || '(お名前の情報なし)'));
+    if (pLp) {
+      lines.push('- ライフパスナンバー:' + pLp.num.value + (pLp.num.isMaster ? '(マスターナンバー)' : ''));
+      lines.push('  計算過程:' + pLp.work);
+    }
+    if (pDs) {
+      lines.push('- ディスティニーナンバー:' + pDs.num.value + (pDs.num.isMaster ? '(マスターナンバー)' : ''));
+      lines.push('  計算過程:' + pDs.work);
+    }
+    if (pSl) {
+      lines.push('- ソウルナンバー:' + pSl.num.value + (pSl.num.isMaster ? '(マスターナンバー)' : ''));
+      lines.push('  計算過程:' + pSl.work);
+    }
+    if (!pBirth) {
+      lines.push('- ライフパスナンバー:生年月日が未提供のため算出なし');
+      lines.push('  → 鑑定文に「生年月日が分かればさらに深く読めます」と一言添えること');
+    }
+    lines.push('');
+    lines.push('※上の数字と計算過程は確定値です。そのまま鑑定文に引用し、再計算・修正をしないでください。');
+
+    el('payload').value = lines.join('\n');
+    el('out').classList.add('show');
+    el('copied').textContent = '';
+  });
+
+  el('copy').addEventListener('click', function () {
+    var t = el('payload');
+    t.removeAttribute('readonly');
+    t.select();
+    t.setSelectionRange(0, 99999);
+    try { document.execCommand('copy'); el('copied').textContent = 'コピーしました'; }
+    catch (e) { el('copied').textContent = '手動で選択してコピーしてください'; }
+    t.setAttribute('readonly', 'readonly');
+    window.getSelection().removeAllRanges();
+  });
+
+  el('clear').addEventListener('click', function () {
+    ['c-name', 'c-birth', 'p-name', 'p-birth'].forEach(function (id) { el(id).value = ''; });
+    el('out').classList.remove('show');
+    el('err').textContent = '';
+  });
+
+  // 鑑定日の初期値を今日にする
+  (function initToday() {
+    var d = new Date();
+    var s = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    el('today').value = s;
+  })();
+})();
+</script>
+</body>
+</html>
